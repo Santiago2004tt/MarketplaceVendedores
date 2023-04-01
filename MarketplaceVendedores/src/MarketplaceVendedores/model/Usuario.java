@@ -19,6 +19,10 @@ public abstract class Usuario {
         this.cuenta = cuenta;
     }
 
+    public Usuario() {
+
+    }
+
     public String getNombre() {
         return nombre;
     }

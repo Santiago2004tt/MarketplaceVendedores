@@ -28,6 +28,9 @@ public class Vendedor extends Usuario {
         listaMensajes = new ArrayList<Mensaje>();
     }
 
+    public Vendedor() {
+    }
+
     public ArrayList<Vendedor> getListaVendedoresAliados() {
         return listaVendedoresAliados;
     }

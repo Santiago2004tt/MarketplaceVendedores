@@ -23,6 +23,10 @@ public class Producto {
         this.date = date;
     }
 
+    public Producto() {
+
+    }
+
     public String getNombre() {
         return nombre;
     }
