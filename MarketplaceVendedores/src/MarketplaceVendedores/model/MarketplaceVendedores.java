@@ -83,11 +83,13 @@ public class MarketplaceVendedores {
      */
     public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws Exception {
         Vendedor vendedor = new Vendedor();
+        Muro muro = new Muro();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
         vendedor.setCuenta(cuenta);
+        vendedor.setMuro(muro);
 
         if(existeVendedor(cedula)){
             throw new Exception("Cliente Hecho");

@@ -7,18 +7,19 @@ import java.util.ArrayList;
 public class Vendedor extends Usuario {
 
     private Vendedor[] listaVendedoresAliados;
-
+    private Muro muro;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaSolicitudes;
     private ArrayList<Vendedor> listaRecomendados;
 
 
-    public Vendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) {
+    public Vendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta, Muro muro) {
         super(nombre, apellido, cedula, direccion, cuenta);
         listaVendedoresAliados  = new Vendedor[10];
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
+        this.muro = muro;
     }
 
     public Vendedor() {
@@ -60,4 +61,11 @@ public class Vendedor extends Usuario {
         this.listaRecomendados = listaRecomendados;
     }
 
+    public Muro getMuro() {
+        return muro;
+    }
+
+    public void setMuro(Muro muro) {
+        this.muro = muro;
+    }
 }
