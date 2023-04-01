@@ -5,11 +5,8 @@ import java.util.ArrayList;
 
 public class MarketplaceVendedores {
     private String nombre;
-    private Usuario usuario;
-    private Producto producto;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
-    private ArrayList<Administrador> listaAdministradores;
     private ArrayList<Cuenta> listaCuentas;
 
     /**
@@ -21,7 +18,6 @@ public class MarketplaceVendedores {
         this.nombre = nombre;
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
-        listaAdministradores = new ArrayList<Administrador>();
         listaCuentas = new ArrayList<Cuenta>();
     }
 
@@ -48,14 +44,6 @@ public class MarketplaceVendedores {
 
     public void setListaVendedores(ArrayList<Vendedor> listaVendedores) {
         this.listaVendedores = listaVendedores;
-    }
-
-    public ArrayList<Administrador> getListaAdministradores() {
-        return listaAdministradores;
-    }
-
-    public void setListaAdministradores(ArrayList<Administrador> listaAdministradores) {
-        this.listaAdministradores = listaAdministradores;
     }
 
     public ArrayList<Cuenta> getListaCuentas() {
@@ -175,108 +163,7 @@ public class MarketplaceVendedores {
         return vendedorEncontrado;
     }
 
-    //--------------------------------------------------------------------------------------------
 
-    /**
-     * Metodo que permite crear un Admin mediante sus atributos de clase
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param direccion
-     * @param cuenta
-     * @return
-     * @throws Exception
-     */
-    public boolean crearAdmin(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws Exception {
-        Administrador administrador = new Administrador();
-        administrador.setNombre(nombre);
-        administrador.setApellido(apellido);
-        administrador.setCedula(cedula);
-        administrador.setDireccion(direccion);
-        administrador.setCuenta(cuenta);
-
-        if(existeAdmin(cedula)){
-            throw new Exception("Admin Hecho");
-        }
-        getListaAdministradores().add(administrador);
-        return true;
-    }
-
-    /**
-     * Metodo que permite verificar la existencia de un admin por su cedula
-     * @param cedula
-     * @return
-     */
-    private boolean existeAdmin(String cedula) {
-        for (Administrador administrador : listaAdministradores) {
-            if (administrador.getCedula().equals(cedula)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo que permite actualizar un admin buscandolo por su cedula
-     * @param nombre
-     * @param apellido
-     * @param cedula
-     * @param direccion
-     * @param email
-     * @param cuenta
-     * @return
-     */
-    public boolean actualizarAdmin(String nombre, String apellido, String cedula, String direccion,String email, Cuenta cuenta) {
-        for (Administrador administrador : listaAdministradores) {
-            if (administrador.getCedula().equals(cedula)) {
-                administrador.setNombre(nombre);
-                administrador.setApellido(apellido);
-                administrador.setDireccion(direccion);
-                administrador.setCuenta(cuenta);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo que permite eliminar un admin por su cedula
-     * @param cedula
-     * @return
-     */
-    public boolean eliminarAdmin(String cedula) {
-        if (existeAdmin(cedula)) {
-            for (Administrador administrador : listaAdministradores) {
-                if (administrador.getCedula().equals(cedula)) {
-                    getListaVendedores().remove(administrador);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo que permite buscar un admin por su cedula
-     * @param cedula
-     * @return
-     * @throws Exception
-     */
-    public Administrador buscarAdmin(String cedula) throws Exception {
-        Administrador adminEncontrado = null;
-        if (existeAdmin(cedula)) {
-            for (Administrador administrador : getListaAdministradores()) {
-                if (administrador.getCedula().equals(cedula)) {
-                    adminEncontrado = administrador;
-                    return adminEncontrado;
-                }
-            }
-        }
-        if (adminEncontrado == null) {
-            throw new Exception("Admin no encontrado");
-        }
-        return adminEncontrado;
-    }
     //-----------------------------------------------------------------------------------------------
 
     /**
