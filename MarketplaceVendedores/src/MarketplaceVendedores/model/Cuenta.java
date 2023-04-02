@@ -11,6 +11,10 @@ public class Cuenta {
         this.contrasenia = contrasenia;
     }
 
+    public Cuenta(){
+
+    }
+
     public String getUsuario() {
         return usuario;
     }

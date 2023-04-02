@@ -1,5 +1,7 @@
 package MarketplaceVendedores.model;
 
+import MarketplaceVendedores.exceptions.CuentaException;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -273,5 +275,98 @@ public class MarketplaceVendedores {
             throw new Exception("Producto no encontrado");
         }
         return productoEncontrado;
+    }
+    //-------------------------------------------------------------------------------------
+    /**
+     * Metodo que permite crear un producto setteando sus atributos de clase
+     * @param nombre
+     * @param codigo
+     * @param categoria
+     * @param precio
+     * @param estado
+     * @param image
+     * @param date
+     * @return
+     * @throws Exception
+     */
+    public boolean crearCuenta(String usuario, String contrasenia) throws CuentaException {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setUsuario(usuario);
+        cuenta.setContrasenia(contrasenia);
+
+        if(existeCuenta(usuario, contrasenia)){
+            throw new CuentaException("cuenta Hecha");
+        }
+        getListaCuentas().add(cuenta);
+        return true;
+    }
+
+    /**
+     * Metodo que permite verificar la existencia de un producto mediante su codigo
+     * @param codigo
+     * @return
+     */
+    private boolean existeCuenta(String usuario, String contrasenia) {
+        for (Cuenta cuenta : listaCuentas) {
+            if (cuenta.getUsuario().equals(usuario) && cuenta.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Metodo que permite actualizar un producto
+     * @param nombre
+     * @param codigo
+     * @param categoria
+     * @param precio
+     * @param estado
+     * @param image
+     * @param date
+     * @return
+     */
+    public boolean actualizarProducto(String usuario, String contrasenia) throws CuentaException {
+        if(existeCuenta(usuario, contrasenia)){
+            Cuenta cuenta = buscarCuenta(usuario, contrasenia);
+            cuenta.setContrasenia(contrasenia);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Metodo que permite eliminar un producto por su codigo
+     * @param codigo
+     * @return
+     */
+    public boolean eliminarCuenta(String usuario, String contrasenia) throws CuentaException {
+        if (existeCuenta(usuario, contrasenia)) {
+            Cuenta cuenta = buscarCuenta(usuario, contrasenia);
+            getListaCuentas().remove(cuenta);
+        }
+        return false;
+    }
+
+    /**
+     * metodo que permite buscar un producto mediante su codigo
+     * @param codigo
+     * @return
+     * @throws Exception
+     */
+    public Cuenta buscarCuenta(String usario, String contrasenia) throws CuentaException {
+        Cuenta cuentaEncontrado = null;
+        if (existeCuenta(usario, contrasenia)) {
+            for (Cuenta cuenta : getListaCuentas()) {
+                if (cuenta.getUsuario().equals(usario)) {
+                    cuentaEncontrado = cuenta;
+                    return cuentaEncontrado;
+                }
+            }
+        }
+        if (cuentaEncontrado == null) {
+            throw new CuentaException("Cuenta no encontrada");
+        }
+        return cuentaEncontrado;
     }
 }
