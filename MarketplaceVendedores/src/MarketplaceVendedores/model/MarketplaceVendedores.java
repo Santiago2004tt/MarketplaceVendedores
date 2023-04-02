@@ -1,8 +1,6 @@
 package MarketplaceVendedores.model;
 
-import MarketplaceVendedores.exceptions.CuentaException;
-import MarketplaceVendedores.exceptions.ProductoExceptions;
-import MarketplaceVendedores.exceptions.VendedorException;
+import MarketplaceVendedores.exceptions.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,6 +10,7 @@ public class MarketplaceVendedores {
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
     private ArrayList<Cuenta> listaCuentas;
+    private ArrayList<Factura> listaFacturas;
 
     /**
      * Constructor de la clase MarketplaceVendedores
@@ -23,6 +22,7 @@ public class MarketplaceVendedores {
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaCuentas = new ArrayList<Cuenta>();
+        listaFacturas = new ArrayList<Factura>();
     }
 
     //GETTERS AND SETTERS----------------------------------------------------------------------------
@@ -58,6 +58,13 @@ public class MarketplaceVendedores {
         this.listaCuentas = listaCuentas;
     }
 
+    public ArrayList<Factura> getListaFacturas() {
+        return listaFacturas;
+    }
+
+    public void setListaFacturas(ArrayList<Factura> listaFacturas) {
+        this.listaFacturas = listaFacturas;
+    }
     //--------------------------------------------------------------------------------------------
 
     //---------------------------------CRUD---------------------------------------------------------
@@ -178,7 +185,7 @@ public class MarketplaceVendedores {
      * @return
      * @throws Exception
      */
-    public boolean crearProducto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) throws Exception {
+    public boolean crearProducto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) throws ProductoExceptions {
         Producto producto = new Producto();
         producto.setNombre(nombre);
         producto.setCodigo(codigo);
@@ -189,7 +196,7 @@ public class MarketplaceVendedores {
         producto.setImage(image);
 
         if(existeProducto(codigo)){
-            throw new Exception("producto Hecho");
+            throw new ProductoExceptions("producto Hecho");
         }
         getListaProductos().add(producto);
         return true;
@@ -364,4 +371,70 @@ public class MarketplaceVendedores {
         }
         return cuentaEncontrado;
     }
+
+    //------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------------------------------
+
+    public boolean crearFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
+        Factura factura = new Factura();
+        factura.setFecha(fecha);
+        factura.setNombreVendedor(nombreVendedor);
+        factura.setTotal(total);
+        factura.setSubTotal(subTotal);
+
+        if(existeFactura(fecha,nombreVendedor)){
+            throw new FacturaException("Factura hecha");
+        }
+        getListaFacturas().add(factura);
+        return true;
+    }
+
+    private boolean existeFactura(String fecha, String nombreVendedor) {
+        for (Factura factura : listaFacturas) {
+            if(factura.getFecha().equals(fecha) && factura.getNombreVendedor().equals(nombreVendedor)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizaFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
+        if(existeFactura(fecha,nombreVendedor)){
+            Factura factura = buscarFactura(fecha, nombreVendedor);
+            factura.setTotal(total);
+            factura.setNombreVendedor(nombreVendedor);
+            factura.setSubTotal(subTotal);
+            factura.setFecha(fecha);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarFactura(String nombreVendedor, String fecha) throws FacturaException {
+        if (existeFactura(fecha, nombreVendedor)) {
+            Factura factura = buscarFactura(fecha, nombreVendedor);
+            listaFacturas.remove(factura);
+            return true;
+        }
+        return false;
+    }
+
+
+    public Factura buscarFactura(String fecha,String nombreVendedor) throws FacturaException {
+        Factura facturaEncontrada = null;
+        if(existeFactura(fecha,nombreVendedor)){
+            for (Factura factura: getListaFacturas()) {
+                if(factura.getFecha().equals(fecha) && factura.getFecha().equals(fecha)){
+                    facturaEncontrada= factura;
+                    return facturaEncontrada;
+                }
+            }
+        }
+        if(facturaEncontrada == null){
+            throw new FacturaException("Factura no encontrada");
+        }
+        return facturaEncontrada;
+    }
+
 }
