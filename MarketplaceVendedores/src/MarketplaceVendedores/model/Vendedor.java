@@ -2,8 +2,18 @@ package MarketplaceVendedores.model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * clase vendedor
+ * ----English----
+ *  Seller class
+ */
 public class Vendedor{
 
+    /**
+     * atributos
+     * ---------
+     * Attributes
+     */
     private Vendedor[] listaVendedoresAliados;
     private Muro muro;
     private ArrayList<Producto> listaProductos;
@@ -15,6 +25,17 @@ public class Vendedor{
     private String direccion;
     private Cuenta cuenta;
 
+    /**
+     * Constructor
+     * ----------
+     * Builder
+     * @param muro
+     * @param nombre
+     * @param apellido
+     * @param cedula
+     * @param direccion
+     * @param cuenta
+     */
     public Vendedor(Muro muro, String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) {
         this.muro = muro;
         this.nombre = nombre;
@@ -29,6 +50,11 @@ public class Vendedor{
         this.muro = muro;
     }
 
+    /**
+     * Constructor vacío
+     * ----------------
+     * Void builder
+     */
     public Vendedor() {
         listaVendedoresAliados = new Vendedor[10];
         listaProductos = new ArrayList<Producto>();
@@ -36,6 +62,12 @@ public class Vendedor{
         listaRecomendados= new ArrayList<Vendedor>();
     }
 
+    /**
+     * set y get de lista vendedores aliados
+     * ------------------------------------
+     * Setter and Getter the list sell allies
+     * @return
+     */
     public Vendedor[] getListaVendedoresAliados() {
         return listaVendedoresAliados;
     }
@@ -44,6 +76,12 @@ public class Vendedor{
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
+    /**
+     * set y get de lista productos
+     *  ---------------------------------
+     * Setter and Getter the list product
+     * @return
+     */
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
@@ -52,6 +90,12 @@ public class Vendedor{
         this.listaProductos = listaProductos;
     }
 
+    /**
+     * set y get de lista solicitudes
+     *  ----------------------------------
+     * Setter and Getter the list requests
+     * @return
+     */
     public ArrayList<Vendedor> getListaSolicitudes() {
         return listaSolicitudes;
     }
@@ -59,7 +103,12 @@ public class Vendedor{
     public void setListaSolicitudes(ArrayList<Vendedor> listaSolicitudes) {
         this.listaSolicitudes = listaSolicitudes;
     }
-
+    /**
+     * set y get de lista recomendados
+     *  -------------------------------------
+     * Setter and Getter the list recommended
+     * @return
+     */
     public ArrayList<Vendedor> getListaRecomendados() {
         return listaRecomendados;
     }
@@ -68,6 +117,12 @@ public class Vendedor{
         this.listaRecomendados = listaRecomendados;
     }
 
+    /**
+     * set y get de muro
+     *  -------------------------
+     * Setter and Getter the wall
+     * @return
+     */
     public Muro getMuro() {
         return muro;
     }
@@ -76,6 +131,12 @@ public class Vendedor{
         this.muro = muro;
     }
 
+    /**
+     * set y get de nombre
+     *  -------------------------
+     * Setter and Getter the name
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
@@ -84,6 +145,12 @@ public class Vendedor{
         this.nombre = nombre;
     }
 
+    /**
+     * set y get de apellido
+     *  ------------------------------
+     * Setter and Getter the last name
+     * @return
+     */
     public String getApellido() {
         return apellido;
     }
@@ -92,6 +159,12 @@ public class Vendedor{
         this.apellido = apellido;
     }
 
+    /**
+     * set y get de cédula
+     *  -------------------------
+     * Setter and Getter the card
+     * @return
+     */
     public String getCedula() {
         return cedula;
     }
@@ -100,6 +173,12 @@ public class Vendedor{
         this.cedula = cedula;
     }
 
+    /**
+     * set y get de dirección
+     *  ----------------------------
+     * Setter and Getter the address
+     * @return
+     */
     public String getDireccion() {
         return direccion;
     }
@@ -108,6 +187,12 @@ public class Vendedor{
         this.direccion = direccion;
     }
 
+    /**
+     * set y get de cuenta
+     *  ----------------------------
+     * Setter and Getter the account
+     * @return
+     */
     public Cuenta getCuenta() {
         return cuenta;
     }

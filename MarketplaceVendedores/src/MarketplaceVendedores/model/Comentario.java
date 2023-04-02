@@ -1,13 +1,35 @@
 package MarketplaceVendedores.model;
 
+/**
+ * clase comentario implemento de la interface Muro
+ * ------------------English----------------------
+ * comment class implemented from the Wall interface
+ */
 public class Comentario implements MuroInterface{
 
+    /**
+     * Atributos
+     * ---------
+     * Attributes
+     */
     private String mensaje;
 
+    /**
+     * Constructor
+     * -----------
+     * Builder
+     * @param mensaje
+     */
     public Comentario(String mensaje) {
         this.mensaje = mensaje;
     }
 
+    /**
+     * set y get de mensaje
+     * ----------------------------
+     * Setter and Getter the message
+     * @return
+     */
     public String getMensaje() {
         return mensaje;
     }
@@ -16,7 +38,14 @@ public class Comentario implements MuroInterface{
         this.mensaje = mensaje;
     }
 
-    //---------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------//
+
+    /**
+     * Función para añadir un mensaje
+     * ----------------------
+     * function for add in message
+     * @param mensaje
+     */
     @Override
     public void aniadirMensaje(String mensaje) {
         if(verificarMensaje(mensaje)){
@@ -24,6 +53,13 @@ public class Comentario implements MuroInterface{
         }
     }
 
+    /**
+     * Función para verificar el mensaje
+     * ---------------------------------
+     * function for verify the message
+     * @param mensaje
+     * @return
+     */
     @Override
     public boolean verificarMensaje(String mensaje) {
         if(mensaje.equals("")){

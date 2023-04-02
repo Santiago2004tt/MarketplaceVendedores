@@ -3,8 +3,18 @@ package MarketplaceVendedores.model;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * clase producto
+ * ---English---
+ * Product class
+ */
 public class Producto {
 
+    /**
+     * Atributos
+     * ---------
+     * Attributes
+     */
     private String nombre;
     private String codigo;
     private String categoria;
@@ -13,6 +23,11 @@ public class Producto {
     private Image image;
     private String date;
 
+    /**
+     * Constructor
+     * -----------
+     * Builder
+     */
     public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) {
         this.nombre = nombre;
         this.codigo = codigo;
@@ -23,10 +38,21 @@ public class Producto {
         this.date = date;
     }
 
+    /**
+     * Constructor vacío
+     * -----------------
+     * Void builder
+     */
     public Producto() {
 
     }
 
+    /**
+     * get y set de nombre
+     * ------------------
+     * Getter and Setter the name
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
@@ -35,6 +61,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
+    /**
+     * get y set de código
+     * ------------------
+     * Getter and Setter the code
+     * @return
+     */
     public String getCodigo() {
         return codigo;
     }
@@ -43,6 +75,12 @@ public class Producto {
         this.codigo = codigo;
     }
 
+    /**
+     * get y set de categoría
+     * ------------------
+     * Getter and Setter the categorize
+     * @return
+     */
     public String getCategoria() {
         return categoria;
     }
@@ -51,6 +89,12 @@ public class Producto {
         this.categoria = categoria;
     }
 
+    /**
+     * get y set de precio
+     * ------------------
+     * Getter and Setter the price
+     * @return
+     */
     public double getPrecio() {
         return precio;
     }
@@ -59,6 +103,12 @@ public class Producto {
         this.precio = precio;
     }
 
+    /**
+     * get y set de estado
+     * ------------------
+     * Getter and Setter the state
+     * @return
+     */
     public Estado getEstado() {
         return estado;
     }
@@ -67,6 +117,12 @@ public class Producto {
         this.estado = estado;
     }
 
+    /**
+     * get y set de imagen
+     * ------------------
+     * Getter and Setter the image
+     * @return
+     */
     public Image getImage() {
         return image;
     }
@@ -75,6 +131,12 @@ public class Producto {
         this.image = image;
     }
 
+    /**
+     * get y set de fecha
+     * ------------------
+     * Getter and Setter the date
+     * @return
+     */
     public String getDate() {
         return date;
     }

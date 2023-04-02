@@ -1,20 +1,48 @@
 package MarketplaceVendedores.model;
-
 import java.util.Objects;
 
+/**
+ * Clase Cuenta
+ * ---English---
+ * Account class
+ */
 public class Cuenta {
+
+    /**
+     * Atributos
+     * ---------
+     * attributes
+     */
     private String usuario;
     private String contrasenia;
 
+    /**
+     * Constructor
+     * -----------
+     * Builder
+     * @param usuario
+     * @param contrasenia
+     */
     public Cuenta(String usuario, String contrasenia) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
 
+    /**
+     * Constructor vacío
+     * ---------------
+     * Void builder
+     */
     public Cuenta(){
 
     }
 
+    /**
+     * get y set de usuario
+     * -------------------
+     * Getter and Setter the user
+     * @return
+     */
     public String getUsuario() {
         return usuario;
     }
@@ -23,6 +51,12 @@ public class Cuenta {
         this.usuario = usuario;
     }
 
+    /**
+     * get y set de contraseña
+     * -----------------------
+     * getter and Setter the password
+     * @return
+     */
     public String getContrasenia() {
         return contrasenia;
     }
@@ -31,6 +65,11 @@ public class Cuenta {
         this.contrasenia = contrasenia;
     }
 
+    /**
+     *Equals y hashcode con usuario y contraseña
+     * ------------------------------
+     * equals and Hashcode with user and password
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
