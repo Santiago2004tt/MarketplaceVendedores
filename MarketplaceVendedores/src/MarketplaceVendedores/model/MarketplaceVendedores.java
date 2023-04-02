@@ -1,6 +1,8 @@
 package MarketplaceVendedores.model;
 
 import MarketplaceVendedores.exceptions.CuentaException;
+import MarketplaceVendedores.exceptions.ProductoExceptions;
+import MarketplaceVendedores.exceptions.VendedorException;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -112,16 +114,15 @@ public class MarketplaceVendedores {
      * @param cuenta
      * @return
      */
-    public boolean actualizarVendedor(String nombre, String apellido, String cedula, String direccion,String email, Cuenta cuenta) {
-        //se recorre la lista de vendedores
-        for (Vendedor vendedor : listaVendedores) {
-            if (vendedor.getCedula().equals(cedula)) {
-                vendedor.setNombre(nombre);
-                vendedor.setApellido(apellido);
-                vendedor.setDireccion(direccion);
-                vendedor.setCuenta(cuenta);
-                return true;
-            }
+    public boolean actualizarVendedor(String nombre, String apellido, String cedula, String direccion,String email, Cuenta cuenta) throws VendedorException {
+
+        if (existeVendedor(cedula)) {
+            Vendedor vendedor = buscarVendedor(cedula);
+            vendedor.setNombre(nombre);
+            vendedor.setApellido(apellido);
+            vendedor.setDireccion(direccion);
+            vendedor.setCuenta(cuenta);
+            return true;
         }
         return false;
     }
@@ -131,14 +132,11 @@ public class MarketplaceVendedores {
      * @param cedula
      * @return
      */
-    public boolean eliminarVendedor(String cedula) {
+    public boolean eliminarVendedor(String cedula) throws VendedorException {
         if (existeVendedor(cedula)) {
-            for (Vendedor vendedor : listaVendedores) {
-                if (vendedor.getCedula().equals(cedula)) {
-                    getListaVendedores().remove(vendedor);
-                    return true;
-                }
-            }
+            Vendedor vendedor = buscarVendedor(cedula);
+            getListaVendedores().remove(vendedor);
+            return true;
         }
         return false;
     }
@@ -149,7 +147,7 @@ public class MarketplaceVendedores {
      * @return
      * @throws Exception
      */
-    public Vendedor buscarVendedor(String cedula) throws Exception {
+    public Vendedor buscarVendedor(String cedula) throws VendedorException {
         Vendedor vendedorEncontrado = null;
         if (existeVendedor(cedula)) {
             for (Vendedor vendedor : getListaVendedores()) {
@@ -160,7 +158,7 @@ public class MarketplaceVendedores {
             }
         }
         if (vendedorEncontrado == null) {
-            throw new Exception("Cliente no encontrado");
+            throw new VendedorException("Cliente no encontrado");
         }
         return vendedorEncontrado;
     }
@@ -222,18 +220,17 @@ public class MarketplaceVendedores {
      * @param date
      * @return
      */
-    public boolean actualizarProducto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) {
-        for (Producto producto : listaProductos) {
-            if (producto.getCodigo().equals(codigo)) {
-                producto.setNombre(nombre);
-                producto.setCodigo(codigo);
-                producto.setCategoria(categoria);
-                producto.setPrecio(precio);
-                producto.setEstado(estado);
-                producto.setImage(image);
-                producto.setDate(date);
-                return true;
-            }
+    public boolean actualizarProducto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) throws ProductoExceptions {
+        if (existeProducto(codigo)) {
+            Producto producto = buscarProducto(codigo);
+            producto.setNombre(nombre);
+            producto.setCodigo(codigo);
+            producto.setCategoria(categoria);
+            producto.setPrecio(precio);
+            producto.setEstado(estado);
+            producto.setImage(image);
+            producto.setDate(date);
+            return true;
         }
         return false;
     }
@@ -243,14 +240,11 @@ public class MarketplaceVendedores {
      * @param codigo
      * @return
      */
-    public boolean eliminarProducto(String codigo) {
+    public boolean eliminarProducto(String codigo) throws ProductoExceptions {
         if (existeProducto(codigo)) {
-            for (Producto producto : listaProductos) {
-                if (producto.getCodigo().equals(codigo)) {
-                    getListaVendedores().remove(producto);
-                    return true;
-                }
-            }
+            Producto producto = buscarProducto(codigo);
+            listaProductos.remove(producto);
+            return true;
         }
         return false;
     }
@@ -261,7 +255,7 @@ public class MarketplaceVendedores {
      * @return
      * @throws Exception
      */
-    public Producto buscarProducto(String codigo) throws Exception {
+    public Producto buscarProducto(String codigo) throws ProductoExceptions {
         Producto productoEncontrado = null;
         if (existeProducto(codigo)) {
             for (Producto producto : getListaProductos()) {
@@ -272,7 +266,7 @@ public class MarketplaceVendedores {
             }
         }
         if (productoEncontrado == null) {
-            throw new Exception("Producto no encontrado");
+            throw new ProductoExceptions("Producto no encontrado");
         }
         return productoEncontrado;
     }
@@ -344,6 +338,7 @@ public class MarketplaceVendedores {
         if (existeCuenta(usuario, contrasenia)) {
             Cuenta cuenta = buscarCuenta(usuario, contrasenia);
             getListaCuentas().remove(cuenta);
+            return true;
         }
         return false;
     }
