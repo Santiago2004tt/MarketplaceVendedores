@@ -5,7 +5,18 @@ import MarketplaceVendedores.exceptions.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * clase market place
+ * ----------English-----------
+ * class market place
+ */
 public class MarketplaceVendedores {
+
+    /**
+     * atributos
+     * --------
+     * Attributes
+     */
     private String nombre;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
@@ -14,9 +25,10 @@ public class MarketplaceVendedores {
 
     /**
      * Constructor de la clase MarketplaceVendedores
+     * --------------------------------------------
+     * Builder of the class MarketPlaceSeller
      * @param nombre
      */
-
     public MarketplaceVendedores(String nombre) {
         this.nombre = nombre;
         listaVendedores = new ArrayList<Vendedor>();
@@ -25,7 +37,12 @@ public class MarketplaceVendedores {
         listaFacturas = new ArrayList<Factura>();
     }
 
-    //GETTERS AND SETTERS----------------------------------------------------------------------------
+    /**
+     * set y get de nombre
+     *  -------------------------
+     * Setter and Getter the name
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
@@ -34,6 +51,12 @@ public class MarketplaceVendedores {
         this.nombre = nombre;
     }
 
+    /**
+     * set y get de lista productos
+     *  ---------------------------------
+     * Setter and Getter the list product
+     * @return
+     */
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
@@ -42,6 +65,12 @@ public class MarketplaceVendedores {
         this.listaProductos = listaProductos;
     }
 
+    /**
+     * set y get de lista vendedores
+     * ------------------------------------
+     * Setter and Getter the seller list
+     * @return
+     */
     public ArrayList<Vendedor> getListaVendedores() {
         return listaVendedores;
     }
@@ -50,6 +79,12 @@ public class MarketplaceVendedores {
         this.listaVendedores = listaVendedores;
     }
 
+    /**
+     * set y get de lista cuentas
+     * ------------------------------------
+     * Setter and Getter the account list
+     * @return
+     */
     public ArrayList<Cuenta> getListaCuentas() {
         return listaCuentas;
     }
@@ -57,7 +92,12 @@ public class MarketplaceVendedores {
     public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
         this.listaCuentas = listaCuentas;
     }
-
+    /**
+     * set y get de lista facturas
+     * ------------------------------------
+     * Setter and Getter the bill
+     * @return
+     */
     public ArrayList<Factura> getListaFacturas() {
         return listaFacturas;
     }
@@ -65,13 +105,16 @@ public class MarketplaceVendedores {
     public void setListaFacturas(ArrayList<Factura> listaFacturas) {
         this.listaFacturas = listaFacturas;
     }
-    //--------------------------------------------------------------------------------------------
 
-    //---------------------------------CRUD---------------------------------------------------------
+    //---------------------------------CRUD-vendedor--------------------------------------------------------//
+    //---------------------------------CRUD-seller--------------------------------------------------------//
 
     /**
-     * Metodo que permite crear un vendedor teniendo en cuenta sus atributos de clase y lo agrega a la
+     * Método que permite crear un vendedor teniendo en cuenta sus atributos de clase y lo agrega a la
      * lista de vendedores
+     * ------------------------------------------------------------------------------------------------
+     * Method that allows creating a vendor taking into account its class attributes and adding it to the
+     * seller list
      * @param nombre
      * @param apellido
      * @param cedula
@@ -98,7 +141,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite verificar la existencia de un vendedor mediante su cedula
+     * Metodo que permite verificar la existencia de un vendedor mediante su cédula
+     * ----------------------------------------------------------------------------
+     * Method that allows verifying the existence of a seller through his ID
      * @param cedula
      * @return
      */
@@ -112,7 +157,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite actualizar un vendedor utilizando sus atributos de clase
+     * Método que permite actualizar un vendedor utilizando sus atributos de clase
+     * ---------------------------------------------------------------------------
+     * Method that allows a vendor to be updated using its class attributes
      * @param nombre
      * @param apellido
      * @param cedula
@@ -135,7 +182,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite eliminar un vendedor mediante su cedula
+     * Método que permite eliminar un vendedor mediante su cédula
+     * ----------------------------------------------------------
+     * Method that allows to eliminate a seller through his ID
      * @param cedula
      * @return
      */
@@ -149,7 +198,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite buscar un vendedor por su cedula
+     * Método que permite buscar un vendedor por su cédula
+     * ---------------------------------------------------
+     * Method that allows you to search for a seller by his ID
      * @param cedula
      * @return
      * @throws Exception
@@ -171,10 +222,13 @@ public class MarketplaceVendedores {
     }
 
 
-    //-----------------------------------------------------------------------------------------------
+    //-----------------------------------------------CRUD-Producto-----------------------------------------//
+    //-----------------------------------------------CRUD-Product-----------------------------------------//
 
     /**
-     * Metodo que permite crear un producto setteando sus atributos de clase
+     * Método que permite crear un producto seteando sus atributos de clase
+     * -------------------------------------------------------------------
+     * Method that allows creating a product by setting its class attributes
      * @param nombre
      * @param codigo
      * @param categoria
@@ -203,7 +257,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite verificar la existencia de un producto mediante su codigo
+     * Método que permite verificar la existencia de un producto mediante su código
+     * ----------------------------------------------------------------------------
+     * Method that allows verifying the existence of a product through its code
      * @param codigo
      * @return
      */
@@ -217,7 +273,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite actualizar un producto
+     * Método que permite actualizar un producto
+     * ------------------------------------------
+     * Method for updating a product
      * @param nombre
      * @param codigo
      * @param categoria
@@ -243,7 +301,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite eliminar un producto por su codigo
+     * Método que permite eliminar un producto por su código
+     * ----------------------------------------------------
+     * Method that allows to eliminate a product by its code
      * @param codigo
      * @return
      */
@@ -257,7 +317,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * metodo que permite buscar un producto mediante su codigo
+     * Método que permite buscar un producto mediante su código
+     * --------------------------------------------------------
+     * Method that allows you to search for a product by its code
      * @param codigo
      * @return
      * @throws Exception
@@ -277,16 +339,13 @@ public class MarketplaceVendedores {
         }
         return productoEncontrado;
     }
-    //-------------------------------------------------------------------------------------
+    //-------------------------------------------CRUD-Cuenta-----------------------------------------------//
+    //-------------------------------------------CRUD-Account-----------------------------------------------//
+
     /**
-     * Metodo que permite crear un producto setteando sus atributos de clase
-     * @param nombre
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param image
-     * @param date
+     * Método que permite crear un producto seteando sus atributos de clase
+     * --------------------------------------------------------------------
+     * Method that allows creating a product by setting its class attributes
      * @return
      * @throws Exception
      */
@@ -303,8 +362,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite verificar la existencia de un producto mediante su codigo
-     * @param codigo
+     * Método que permite verificar la existencia de un producto mediante su código
+     * ----------------------------------------------------------------------------
+     * Method that allows verifying the existence of a product through its code
      * @return
      */
     private boolean existeCuenta(String usuario, String contrasenia) {
@@ -317,14 +377,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite actualizar un producto
-     * @param nombre
-     * @param codigo
-     * @param categoria
-     * @param precio
-     * @param estado
-     * @param image
-     * @param date
+     * Método que permite actualizar un producto
+     * -----------------------------------------
+     * Method for updating a product
      * @return
      */
     public boolean actualizarProducto(String usuario, String contrasenia) throws CuentaException {
@@ -337,8 +392,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * Metodo que permite eliminar un producto por su codigo
-     * @param codigo
+     * Método que permite eliminar un producto por su código
+     * -----------------------------------------------------
+     * Method that allows to eliminate a product by its code
      * @return
      */
     public boolean eliminarCuenta(String usuario, String contrasenia) throws CuentaException {
@@ -351,8 +407,9 @@ public class MarketplaceVendedores {
     }
 
     /**
-     * metodo que permite buscar un producto mediante su codigo
-     * @param codigo
+     * Método que permite buscar un producto mediante su código
+     * -------------------------------------------------------
+     * Method that allows you to search for a product by its code
      * @return
      * @throws Exception
      */
@@ -372,10 +429,16 @@ public class MarketplaceVendedores {
         return cuentaEncontrado;
     }
 
-    //------------------------------------------------------------------------------------------------
+    //--------------------------------------------CRUD-Factura------------------------------------------------//
+    //--------------------------------------------CRUD-bill------------------------------------------------//
 
-    //------------------------------------------------------------------------------------------------
-
+    /**
+     * Método que permite crear una factura seteando sus atributos de clase
+     * --------------------------------------------------------------------
+     * Method that allows creating a bill by setting its class attributes
+     * @return
+     * @throws Exception
+     */
     public boolean crearFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
         Factura factura = new Factura();
         factura.setFecha(fecha);
@@ -390,6 +453,12 @@ public class MarketplaceVendedores {
         return true;
     }
 
+    /**
+     * Método que permite verificar la existencia de una factura mediante su fecha y nombre
+     * ----------------------------------------------------------------------------
+     * Method that allows verifying the existence of a bill through its date and name
+     * @return
+     */
     private boolean existeFactura(String fecha, String nombreVendedor) {
         for (Factura factura : listaFacturas) {
             if(factura.getFecha().equals(fecha) && factura.getNombreVendedor().equals(nombreVendedor)){
@@ -399,6 +468,12 @@ public class MarketplaceVendedores {
         return false;
     }
 
+    /**
+     * Método que permite actualizar una factura
+     * -----------------------------------------
+     * Method for updating a bill
+     * @return
+     */
     public boolean actualizaFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
         if(existeFactura(fecha,nombreVendedor)){
             Factura factura = buscarFactura(fecha, nombreVendedor);
@@ -411,6 +486,12 @@ public class MarketplaceVendedores {
         return false;
     }
 
+    /**
+     * Método que permite eliminar una factura por su fecha y nombre
+     * -----------------------------------------------------
+     * Method that allows to eliminate a bill by its date and name
+     * @return
+     */
     public boolean eliminarFactura(String nombreVendedor, String fecha) throws FacturaException {
         if (existeFactura(fecha, nombreVendedor)) {
             Factura factura = buscarFactura(fecha, nombreVendedor);
@@ -420,7 +501,13 @@ public class MarketplaceVendedores {
         return false;
     }
 
-
+    /**
+     * Método que permite buscar una factura mediante su fecha
+     * -------------------------------------------------------
+     * Method that allows you to search for a bill by its date
+     * @return
+     * @throws Exception
+     */
     public Factura buscarFactura(String fecha,String nombreVendedor) throws FacturaException {
         Factura facturaEncontrada = null;
         if(existeFactura(fecha,nombreVendedor)){
