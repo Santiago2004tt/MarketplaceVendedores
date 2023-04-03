@@ -65,7 +65,7 @@ public class Vendedor{
     /**
      * set y get de lista vendedores aliados
      * ------------------------------------
-     * Setter and Getter the list sell allies
+     * Setter and Getter the list seller allies
      * @return
      */
     public Vendedor[] getListaVendedoresAliados() {
