@@ -21,7 +21,6 @@ public class MarketplaceVendedores {
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;
     private ArrayList<Cuenta> listaCuentas;
-    private ArrayList<Factura> listaFacturas;
 
     /**
      * Constructor de la clase MarketplaceVendedores
@@ -34,7 +33,6 @@ public class MarketplaceVendedores {
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaCuentas = new ArrayList<Cuenta>();
-        listaFacturas = new ArrayList<Factura>();
     }
 
     /**
@@ -92,20 +90,6 @@ public class MarketplaceVendedores {
     public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
         this.listaCuentas = listaCuentas;
     }
-    /**
-     * set y get de lista facturas
-     * ------------------------------------
-     * Setter and Getter the bill
-     * @return
-     */
-    public ArrayList<Factura> getListaFacturas() {
-        return listaFacturas;
-    }
-
-    public void setListaFacturas(ArrayList<Factura> listaFacturas) {
-        this.listaFacturas = listaFacturas;
-    }
-
     //---------------------------------CRUD-vendedor--------------------------------------------------------//
     //---------------------------------CRUD-seller--------------------------------------------------------//
 
@@ -427,101 +411,6 @@ public class MarketplaceVendedores {
             throw new CuentaException("Cuenta no encontrada");
         }
         return cuentaEncontrado;
-    }
-
-    //--------------------------------------------CRUD-Factura------------------------------------------------//
-    //--------------------------------------------CRUD-bill------------------------------------------------//
-
-    /**
-     * Método que permite crear una factura seteando sus atributos de clase
-     * --------------------------------------------------------------------
-     * Method that allows creating a bill by setting its class attributes
-     * @return
-     * @throws Exception
-     */
-    public boolean crearFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
-        Factura factura = new Factura();
-        factura.setFecha(fecha);
-        factura.setNombreVendedor(nombreVendedor);
-        factura.setTotal(total);
-        factura.setSubTotal(subTotal);
-
-        if(existeFactura(fecha,nombreVendedor)){
-            throw new FacturaException("Factura hecha");
-        }
-        getListaFacturas().add(factura);
-        return true;
-    }
-
-    /**
-     * Método que permite verificar la existencia de una factura mediante su fecha y nombre
-     * ----------------------------------------------------------------------------
-     * Method that allows verifying the existence of a bill through its date and name
-     * @return
-     */
-    private boolean existeFactura(String fecha, String nombreVendedor) {
-        for (Factura factura : listaFacturas) {
-            if(factura.getFecha().equals(fecha) && factura.getNombreVendedor().equals(nombreVendedor)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Método que permite actualizar una factura
-     * -----------------------------------------
-     * Method for updating a bill
-     * @return
-     */
-    public boolean actualizaFactura(String fecha, String nombreVendedor, double total, double subTotal) throws FacturaException {
-        if(existeFactura(fecha,nombreVendedor)){
-            Factura factura = buscarFactura(fecha, nombreVendedor);
-            factura.setTotal(total);
-            factura.setNombreVendedor(nombreVendedor);
-            factura.setSubTotal(subTotal);
-            factura.setFecha(fecha);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Método que permite eliminar una factura por su fecha y nombre
-     * -----------------------------------------------------
-     * Method that allows to eliminate a bill by its date and name
-     * @return
-     */
-    public boolean eliminarFactura(String nombreVendedor, String fecha) throws FacturaException {
-        if (existeFactura(fecha, nombreVendedor)) {
-            Factura factura = buscarFactura(fecha, nombreVendedor);
-            listaFacturas.remove(factura);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Método que permite buscar una factura mediante su fecha
-     * -------------------------------------------------------
-     * Method that allows you to search for a bill by its date
-     * @return
-     * @throws Exception
-     */
-    public Factura buscarFactura(String fecha,String nombreVendedor) throws FacturaException {
-        Factura facturaEncontrada = null;
-        if(existeFactura(fecha,nombreVendedor)){
-            for (Factura factura: getListaFacturas()) {
-                if(factura.getFecha().equals(fecha) && factura.getFecha().equals(fecha)){
-                    facturaEncontrada= factura;
-                    return facturaEncontrada;
-                }
-            }
-        }
-        if(facturaEncontrada == null){
-            throw new FacturaException("Factura no encontrada");
-        }
-        return facturaEncontrada;
     }
 
 }
