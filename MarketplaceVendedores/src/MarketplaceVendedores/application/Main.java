@@ -1,6 +1,5 @@
 package MarketplaceVendedores.application;
 
-import MarketplaceVendedores.controllers.LoginVendedorController;
 import MarketplaceVendedores.controllers.MainViewVendedorController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,11 +26,12 @@ public class Main extends Application {
     public void MostrarLoginVendedor (){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../views/LoginVendedor.fxml"));
-            BorderPane borderPane = loader.load();
-            LoginVendedorController controller = loader.getController();
-            controller.setMain(this);
-            Scene scene = new Scene(borderPane);
+            loader.setLocation(Main.class.getResource("../views/CrearCuentaVendedores.fxml"));
+            //BorderPane borderPane = loader.load();
+            //LoginVendedorController controller = loader.getController();
+            //controller.setMain(this);
+            AnchorPane rootLayout = loader.load();
+            Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
             stage.setTitle("Marketplace Vendedores");
             stage.show();
@@ -43,7 +43,7 @@ public class Main extends Application {
     public void mostrarMainVendedor(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../views/MainViewVendedor.fxml"));
+            loader.setLocation(Main.class.getResource("MarketplaceVendedores/views/muroVendedorPrincipal.fxml"));
             BorderPane borderPane = loader.load();
             MainViewVendedorController controller = loader.getController();
             controller.setMain(this);

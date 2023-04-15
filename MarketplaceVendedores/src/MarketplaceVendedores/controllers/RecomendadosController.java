@@ -10,49 +10,61 @@ import javafx.scene.control.TableView;
 public class RecomendadosController {
 
     @FXML
-    private Button aceptar;
+    private Tab tabRecomendados;
 
     @FXML
-    private TableColumn<?, ?> apellido;
-
-    @FXML
-    private Button chat;
-
-    @FXML
-    private Button enviarSolicitud;
-
-    @FXML
-    private TableColumn<?, ?> nombre;
-
-    @FXML
-    private Button rechazar;
-
-    @FXML
-    private Tab recomendados;
-
-    @FXML
-    private Tab solicitudes;
-
-    @FXML
-    private TableView<?> tablaRecomendados;
-
-    @FXML
-    private TableView<?> tablaSolicitudes;
+    private TableColumn<?, ?> columNombreSolicitud;
 
     @FXML
     private TableView<?> tablaVendedoresAliados;
 
     @FXML
-    private Tab vendedoresAliados;
+    private TableColumn<?, ?> columnNombreVendedor;
 
     @FXML
-    private Button visitar;
+    private TableView<?> tablaSolicitudes;
 
     @FXML
-    private Button volver;
+    private Button btnEnviarSolicitud;
 
     @FXML
-    void aceptarSolicitudAction(ActionEvent event) {
+    private Button btnVisitar;
+
+    @FXML
+    private Tab tabVendedoresAliados;
+
+    @FXML
+    private TableColumn<?, ?> columnApellidoVendedor;
+
+    @FXML
+    private Tab tabSolicitudes;
+
+    @FXML
+    private TableColumn<?, ?> columnApellidoRecomendados;
+
+    @FXML
+    private Button btnVolver;
+
+    @FXML
+    private Button btnAceptar;
+
+    @FXML
+    private Button btnChat;
+
+    @FXML
+    private Button btnRechazar;
+
+    @FXML
+    private TableColumn<?, ?> columnNombreRecomendados;
+
+    @FXML
+    private TableColumn<?, ?> columApellidoSolicitud;
+
+    @FXML
+    private TableView<?> tablaRecomendados;
+
+    @FXML
+    void visitarAction(ActionEvent event) {
 
     }
 
@@ -62,7 +74,7 @@ public class RecomendadosController {
     }
 
     @FXML
-    void enviarSolicitudAction(ActionEvent event) {
+    void aceptarSolicitudAction(ActionEvent event) {
 
     }
 
@@ -72,7 +84,7 @@ public class RecomendadosController {
     }
 
     @FXML
-    void visitarAction(ActionEvent event) {
+    void enviarSolicitudAction(ActionEvent event) {
 
     }
 
@@ -81,8 +93,5 @@ public class RecomendadosController {
 
     }
 
-    @FXML
-    void initialize() {
-
-    }
 }
+
