@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.LoginVendedorController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="232.0" style="-fx-background-color: #3B1A77;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="15.0" layoutY="90.0">
+               <image>
+                  <Image url="@../Img/IconMarket.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="385.0" style="-fx-background-color: #5905F6;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnCrearCuenta" layoutX="88.0" layoutY="285.0" mnemonicParsing="false" onAction="#crearCuentaAction" text="Crear Cuenta" />
+            <Button fx:id="btnLogin" layoutX="234.0" layoutY="285.0" mnemonicParsing="false" onAction="#logInAction" text="LogIn" />
+            <Label layoutX="27.0" layoutY="126.0" text="Usuario:" textFill="#fffdfd">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="181.0" text="Contraseña:" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtVendedorPassword" layoutX="109.0" layoutY="181.0" />
+            <TextField fx:id="txtVendedorUser" layoutX="109.0" layoutY="126.0" />
+            <Label layoutX="44.0" layoutY="40.0" text="Bienvenido A MarketPlace Vendedores" textFill="#fcf9f9" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
