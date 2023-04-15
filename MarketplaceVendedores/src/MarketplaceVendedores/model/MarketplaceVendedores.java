@@ -3,6 +3,7 @@ package MarketplaceVendedores.model;
 import MarketplaceVendedores.exceptions.*;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,13 +11,15 @@ import java.util.ArrayList;
  * ----------English-----------
  * class market place
  */
-public class MarketplaceVendedores {
+public class MarketplaceVendedores implements Serializable {
 
     /**
      * atributos
      * --------
      * Attributes
      */
+    private static final long serialVersioUID = 1L;
+
     private String nombre;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaVendedores;

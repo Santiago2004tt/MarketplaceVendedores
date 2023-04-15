@@ -1,4 +1,5 @@
 package MarketplaceVendedores.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -7,13 +8,15 @@ import java.util.Objects;
  * ----English----
  *  Seller class
  */
-public class Vendedor{
+public class Vendedor implements Serializable {
 
     /**
      * atributos
      * ---------
      * Attributes
      */
+
+    private static final long serialVersioUID = 1L;
     private Vendedor[] listaVendedoresAliados;
     private Muro muro;
     private ArrayList<Producto> listaProductos;

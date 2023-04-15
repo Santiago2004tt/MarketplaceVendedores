@@ -1,4 +1,5 @@
 package MarketplaceVendedores.model;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -6,13 +7,15 @@ import java.util.Objects;
  * ---English---
  * Account class
  */
-public class Cuenta {
+public class Cuenta implements Serializable {
 
     /**
      * Atributos
      * ---------
      * attributes
      */
+    private static final long serialVersioUID = 1L;
+
     private String usuario;
     private String contrasenia;
 

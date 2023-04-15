@@ -1,5 +1,6 @@
 package MarketplaceVendedores.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,13 +8,14 @@ import java.util.ArrayList;
  * --English--
  * Wall class
  */
-public class Muro {
+public class Muro implements Serializable {
 
     /**
      * listas de comentarios, mensajes y me gusta
      * ------------------------------------------
      * list the comments, messages and i likes
      */
+    private static final long serialVersioUID = 1L;
     private ArrayList<Comentario> listaComentarios;
 
     private ArrayList<Mensaje> listaMensajes;

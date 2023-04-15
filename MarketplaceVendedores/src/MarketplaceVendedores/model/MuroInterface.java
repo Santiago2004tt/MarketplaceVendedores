@@ -5,7 +5,7 @@ package MarketplaceVendedores.model;
  * -----English-----
  * Wall interface
  */
-public interface MuroInterface {
+public interface MuroInterface  {
 
     /**
      * usos
