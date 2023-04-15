@@ -8,28 +8,28 @@ import javafx.scene.control.TextField;
 public class CrearCuentaController {
 
     @FXML
-    private TextField apellido;
+    private TextField txtNombre;
 
     @FXML
-    private TextField cedula;
+    private Button btnCrearCuenta;
 
     @FXML
-    private TextField contrasenia;
+    private TextField txtDireccion;
 
     @FXML
-    private Button crearCuenta;
+    private Button btnVolver;
 
     @FXML
-    private TextField direccion;
+    private TextField txtApellido;
 
     @FXML
-    private TextField nombre;
+    private TextField txtCedula;
 
     @FXML
-    private TextField usuario;
+    private TextField txtUsuario;
 
     @FXML
-    private Button volver;
+    private TextField txtContrasenia;
 
     @FXML
     void crearCuentaAction(ActionEvent event) {
@@ -41,8 +41,4 @@ public class CrearCuentaController {
 
     }
 
-    @FXML
-    void initialize() {
-
-    }
 }
