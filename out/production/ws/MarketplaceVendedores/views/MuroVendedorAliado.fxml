@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MuroVendedorAliadoController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: #8F11F2;">
+         <children>
+            <Pane layoutY="40.0" prefHeight="118.0" prefWidth="278.0" style="-fx-background-color: #CE8FFF;" />
+            <Label fx:id="txtNombre" layoutX="14.0" layoutY="49.0" prefHeight="32.0" prefWidth="292.0" text="Nombre">
+               <font>
+                  <Font name="Californian FB" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtDireccion" layoutX="14.0" layoutY="113.0" prefHeight="32.0" prefWidth="307.0" text="Direccion">
+               <font>
+                  <Font name="Californian FB" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtApellido" layoutX="14.0" layoutY="81.0" prefHeight="32.0" prefWidth="341.0" text="Apellido">
+               <font>
+                  <Font name="Californian FB" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TableView fx:id="tableListaProductos" layoutX="300.0" layoutY="4.0" prefHeight="290.0" prefWidth="292.0" style="-fx-background-color: #CE8FFF;">
+        <columns>
+          <TableColumn fx:id="columnNombre" prefWidth="97.0" text="Nombre" />
+          <TableColumn fx:id="columnCategoria" prefWidth="92.0" text="Categoria" />
+            <TableColumn fx:id="columnPrecio" prefWidth="102.0" text="Precio" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnSalir" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#salirMuroVendedor" prefHeight="32.0" prefWidth="85.0" text="Salir" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Georgia" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnProducto" layoutX="450.0" layoutY="338.0" mnemonicParsing="false" onAction="#accederVerProducto" prefHeight="32.0" prefWidth="106.0" text="ver producto">
+         <font>
+            <Font name="Georgia" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
