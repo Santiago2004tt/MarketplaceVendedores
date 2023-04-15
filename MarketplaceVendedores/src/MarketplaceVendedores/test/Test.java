@@ -3,9 +3,8 @@ package MarketplaceVendedores.test;
 import MarketplaceVendedores.model.*;
 
 public class Test {
+    public Test() {
+    }
 
-    private static MarketplaceVendedores aux = new MarketplaceVendedores("Test");
-    public static void main(String[] args) throws Exception {
 
-       }
 }

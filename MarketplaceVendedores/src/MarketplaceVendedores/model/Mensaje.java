@@ -1,17 +1,21 @@
 package MarketplaceVendedores.model;
 
+import java.io.Serializable;
+
 /**
  * clase mensaje implemento de interfase muro
  * -----------English--------------
  * Message class implemented the wall interface
  */
-public class Mensaje implements MuroInterface {
+public class Mensaje implements MuroInterface, Serializable {
 
     /**
      * Atributos
      * --------
      * Attributes
      */
+    private static final long serialVersioUID = 1L;
+
     private String mensaje;
     private String mensajeAliado;
 

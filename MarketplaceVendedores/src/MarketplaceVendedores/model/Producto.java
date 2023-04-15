@@ -1,6 +1,7 @@
 package MarketplaceVendedores.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,13 +9,14 @@ import java.util.Objects;
  * ---English---
  * Product class
  */
-public class Producto {
+public class Producto implements Serializable {
 
     /**
      * Atributos
      * ---------
      * Attributes
      */
+    private static final long serialVersioUID = 1L;
     private String nombre;
     private String codigo;
     private String categoria;
