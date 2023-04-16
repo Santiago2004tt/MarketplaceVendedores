@@ -17,7 +17,21 @@ public class Mensaje implements MuroInterface, Serializable {
     private static final long serialVersioUID = 1L;
 
     private String mensaje;
-    private String mensajeAliado;
+
+    public Mensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public Mensaje(){
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
 
     /**
      * Función para añadir un mensaje
@@ -29,7 +43,7 @@ public class Mensaje implements MuroInterface, Serializable {
     public void aniadirMensaje(String mensaje) {
         if(verificarMensaje(mensaje)){
             this.mensaje = mensaje;
-            this.mensajeAliado = "";
+
         }
     }
 

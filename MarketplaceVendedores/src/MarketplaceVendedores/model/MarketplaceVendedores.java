@@ -230,6 +230,8 @@ public class MarketplaceVendedores implements Serializable {
      */
     public boolean crearProducto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) throws ProductoExceptions {
         Producto producto = new Producto();
+        Muro muro = new Muro();
+        producto.setMuro(muro);
         producto.setNombre(nombre);
         producto.setCodigo(codigo);
         producto.setCategoria(categoria);

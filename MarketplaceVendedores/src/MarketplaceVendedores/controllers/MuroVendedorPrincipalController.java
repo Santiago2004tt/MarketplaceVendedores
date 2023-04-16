@@ -55,6 +55,14 @@ public class MuroVendedorPrincipalController {
     private Label labelCedulaVendedor;
 
     @FXML
+    private Button btnCrearProducto;
+
+    @FXML
+    void crearProducto(ActionEvent event) {
+        crearProductoAction();
+    }
+
+    @FXML
     void salirVendedorAction(ActionEvent event) {
         salirVendedor();
     }
@@ -117,5 +125,9 @@ public class MuroVendedorPrincipalController {
         alert.setContentText(contenido);
         DialogPane dialogPane = alert.getDialogPane();
         alert.showAndWait();
+    }
+
+    private void crearProductoAction() {
+        ModelFactoryController.getInstance().visitarCrearProducto(vendedorLoggeado);
     }
 }
