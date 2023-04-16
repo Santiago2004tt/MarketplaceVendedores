@@ -1,7 +1,9 @@
 package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.application.Main;
+import MarketplaceVendedores.exceptions.CuentaException;
 import MarketplaceVendedores.exceptions.VendedorException;
+import MarketplaceVendedores.model.Cuenta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,14 +29,17 @@ public class LoginVendedorController {
     }
 
     @FXML
-    void logInAction(ActionEvent event) throws VendedorException {
+    void logInAction(ActionEvent event) throws VendedorException, CuentaException {
         logInActionEvent();
     }
 
-    private void logInActionEvent() throws VendedorException {
+    private void logInActionEvent() throws VendedorException, CuentaException {
         String usuario = txtVendedorUser.getText();
         String contrasenia = txtVendedorPassword.getText();
         if(validarDatos(usuario, contrasenia)){
+            //prueba
+            //Cuenta cuenta = ModelFactoryController.getInstance().buscarCuenta("12", "12");
+            //System.out.println(cuenta.getUsuario()+ " existe");
             ModelFactoryController.getInstance().iniciarSesion(usuario, contrasenia);
         } else{
             mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);

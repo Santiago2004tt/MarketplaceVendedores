@@ -27,6 +27,8 @@ public class Main extends Application {
 
     public void MostrarLoginVendedor (){
         try {
+            stage.close();
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/LoginVendedor.fxml"));
             BorderPane borderPane = loader.load();
@@ -43,6 +45,8 @@ public class Main extends Application {
 
     public void mostrarMainVendedor(Vendedor vendedor){
         try {
+            stage.close();
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/muroVendedorPrincipal.fxml"));
             BorderPane borderPane = loader.load();
@@ -59,6 +63,8 @@ public class Main extends Application {
 
     public void mostrarCrearCuenta() {
         try {
+            stage.close();
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/CrearCuenta.fxml"));
             AnchorPane rootLayout = loader.load();
@@ -74,6 +80,8 @@ public class Main extends Application {
 
     public void mostrarVendedoresAliados(Vendedor vendedorLoggeado) {
         try {
+            stage.close();
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/vendedoresAliadosRecomendados.fxml"));
             AnchorPane rootLayout = loader.load();
@@ -89,6 +97,8 @@ public class Main extends Application {
 
     public void mostrarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
         try {
+            stage.close();
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/MuroProductoAliado.fxml"));
             AnchorPane rootLayout = loader.load();
