@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MuroVendedorAliadoController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MuroVendedorAliadoController">
    <children>
-      <Pane layoutY="-1.0" prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: #8F11F2;">
+      <Pane prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: #5905f6;">
          <children>
-            <Pane layoutY="40.0" prefHeight="118.0" prefWidth="278.0" style="-fx-background-color: #CE8FFF;" />
-            <Label fx:id="txtNombre" layoutX="14.0" layoutY="49.0" prefHeight="32.0" prefWidth="292.0" text="Nombre">
+            <Pane layoutX="14.0" layoutY="210.0" prefHeight="110.0" prefWidth="268.0" style="-fx-background-color: #3B1A77;">
+               <children>
+                  <Label fx:id="txtApellido" layoutX="14.0" layoutY="39.0" prefHeight="32.0" prefWidth="225.0" text="Apellido" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtDireccion" layoutX="14.0" layoutY="72.0" prefHeight="32.0" prefWidth="225.0" text="Direccion" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtNombre" layoutX="14.0" layoutY="7.0" prefHeight="32.0" prefWidth="225.0" text="Nombre" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB" size="17.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <Button fx:id="btnSalir" layoutX="48.0" layoutY="367.0" mnemonicParsing="false" onAction="#salirMuroVendedor" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #3B1A77;" text="Salir" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
-                  <Font name="Californian FB" size="17.0" />
+                  <Font name="Georgia" size="14.0" />
                </font>
-            </Label>
-            <Label fx:id="txtDireccion" layoutX="14.0" layoutY="113.0" prefHeight="32.0" prefWidth="307.0" text="Direccion">
+            </Button>
+            <Button fx:id="btnProducto" layoutX="399.0" layoutY="367.0" mnemonicParsing="false" onAction="#accederVerProducto" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: #3B1A77;" text="Ver producto" textFill="WHITE">
                <font>
-                  <Font name="Californian FB" size="17.0" />
+                  <Font name="Georgia" size="14.0" />
                </font>
-            </Label>
-            <Label fx:id="txtApellido" layoutX="14.0" layoutY="81.0" prefHeight="32.0" prefWidth="341.0" text="Apellido">
-               <font>
-                  <Font name="Californian FB" size="17.0" />
-               </font>
-            </Label>
+            </Button>
+            <TableView fx:id="tableListaProductos" editable="true" layoutX="300.0" layoutY="38.0" prefHeight="290.0" prefWidth="292.0">
+              <columns>
+                <TableColumn fx:id="columnNombre" prefWidth="97.0" text="Nombre" />
+                <TableColumn fx:id="columnCategoria" prefWidth="92.0" text="Categoria" />
+                  <TableColumn fx:id="columnPrecio" prefWidth="102.0" text="Precio" />
+              </columns>
+            </TableView>
+            <Separator layoutY="343.0" prefHeight="9.0" prefWidth="600.0" style="-fx-background-color: #3B1A77;" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <TableView fx:id="tableListaProductos" layoutX="300.0" layoutY="4.0" prefHeight="290.0" prefWidth="292.0" style="-fx-background-color: #CE8FFF;">
-        <columns>
-          <TableColumn fx:id="columnNombre" prefWidth="97.0" text="Nombre" />
-          <TableColumn fx:id="columnCategoria" prefWidth="92.0" text="Categoria" />
-            <TableColumn fx:id="columnPrecio" prefWidth="102.0" text="Precio" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnSalir" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#salirMuroVendedor" prefHeight="32.0" prefWidth="85.0" text="Salir" textOverrun="CENTER_ELLIPSIS">
-         <font>
-            <Font name="Georgia" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnProducto" layoutX="450.0" layoutY="338.0" mnemonicParsing="false" onAction="#accederVerProducto" prefHeight="32.0" prefWidth="106.0" text="ver producto">
-         <font>
-            <Font name="Georgia" size="12.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
