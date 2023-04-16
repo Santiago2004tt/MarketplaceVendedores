@@ -8,32 +8,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MuroProductoAliadoController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #CD00FF;">
+      <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #3B1A77;">
          <children>
             <ImageView fitHeight="187.0" fitWidth="223.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="14.0" layoutY="278.0" prefHeight="36.0" prefWidth="223.0" text="Label" textFill="WHITE">
+            <Label fx:id="txtNombre" layoutX="16.0" layoutY="200.0" prefHeight="26.0" prefWidth="200.0" text="Nombre" textFill="WHITE">
                <font>
-                  <Font name="Book Antiqua" size="29.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="314.0" prefHeight="36.0" prefWidth="223.0" text="Label" textFill="WHITE">
+            <Label fx:id="txtCategoria" layoutX="16.0" layoutY="230.0" prefHeight="26.0" prefWidth="200.0" text="Categoria" textFill="WHITE">
                <font>
-                  <Font name="Book Antiqua" size="29.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="242.0" prefHeight="36.0" prefWidth="223.0" text="Label" textFill="WHITE">
+            <Label fx:id="txtPrecio" layoutX="16.0" layoutY="260.0" prefHeight="26.0" prefWidth="200.0" text="Precio" textFill="WHITE">
                <font>
-                  <Font name="Book Antiqua" size="29.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
+            <Label fx:id="txtEstado" layoutX="14.0" layoutY="290.0" prefHeight="26.0" prefWidth="200.0" text="Estado" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtDate" layoutX="14.0" layoutY="320.0" prefHeight="26.0" prefWidth="200.0" text="Date" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua" size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableComentario" layoutX="320.0" layoutY="11.0" prefHeight="274.0" prefWidth="270.0">
+              <columns>
+                <TableColumn fx:id="columnComentario" prefWidth="254.0" text="Comentario" />
+              </columns>
+            </TableView>
+            <TextField fx:id="txtComentario" layoutX="401.0" layoutY="303.0" prefHeight="26.0" prefWidth="189.0" />
+            <Label layoutX="320.0" layoutY="303.0" text="Comentario:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRegresar" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#regresar" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="Regresar" />
+            <Button fx:id="btnMeGusta" layoutX="194.0" layoutY="362.0" mnemonicParsing="false" onAction="#darMeGusta" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="me gusta" />
+            <Button fx:id="btnPublicarComentario" layoutX="409.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="Publicar comentario" />
+            <Label fx:id="txtMeGusta" layoutX="278.0" layoutY="360.0" text="Numero" textFill="#eeeeee">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Separator layoutY="351.0" prefHeight="6.0" prefWidth="600.0" style="-fx-background-color: #5905F6; -fx-border-color: #5905F6;" />
+            <Separator layoutX="303.0" orientation="VERTICAL" prefHeight="352.0" prefWidth="5.0" style="-fx-background-color: #5905F6;" />
          </children>
       </Pane>
-      <Pane prefHeight="216.0" prefWidth="240.0" style="-fx-background-color: #8F11F2;">
+      <Pane prefHeight="187.0" prefWidth="277.0" style="-fx-background-color: #5905F6;">
          <children>
-            <ImageView fitHeight="187.0" fitWidth="223.0" layoutX="4.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgProducto" fitHeight="170.0" fitWidth="211.0" layoutX="39.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>
