@@ -18,7 +18,6 @@ public class Vendedor implements Serializable {
 
     private static final long serialVersioUID = 1L;
     private Vendedor[] listaVendedoresAliados;
-    private Muro muro;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaSolicitudes;
     private ArrayList<Vendedor> listaRecomendados;
@@ -32,15 +31,13 @@ public class Vendedor implements Serializable {
      * Constructor
      * ----------
      * Builder
-     * @param muro
      * @param nombre
      * @param apellido
      * @param cedula
      * @param direccion
      * @param cuenta
      */
-    public Vendedor(Muro muro, String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) {
-        this.muro = muro;
+    public Vendedor( String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -50,7 +47,6 @@ public class Vendedor implements Serializable {
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
-        this.muro = muro;
     }
 
     /**
@@ -118,20 +114,6 @@ public class Vendedor implements Serializable {
 
     public void setListaRecomendados(ArrayList<Vendedor> listaRecomendados) {
         this.listaRecomendados = listaRecomendados;
-    }
-
-    /**
-     * set y get de muro
-     *  -------------------------
-     * Setter and Getter the wall
-     * @return
-     */
-    public Muro getMuro() {
-        return muro;
-    }
-
-    public void setMuro(Muro muro) {
-        this.muro = muro;
     }
 
     /**

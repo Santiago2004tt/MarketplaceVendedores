@@ -2,9 +2,7 @@ package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.exceptions.CuentaException;
 import MarketplaceVendedores.exceptions.VendedorException;
-import MarketplaceVendedores.model.Cuenta;
-import MarketplaceVendedores.model.Vendedor;
-import MarketplaceVendedores.test.Huendy;
+import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,8 +11,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 
 public class CrearCuentaController {
-
-    private ModelFactoryController modelFactoryController;
 
     @FXML
     private TextField txtNombre;
@@ -32,50 +28,40 @@ public class CrearCuentaController {
     private TextField txtApellido;
 
     @FXML
+    private TextField txtContrasenia;
+
+    @FXML
     private TextField txtCedula;
 
     @FXML
     private TextField txtUsuario;
 
     @FXML
-    private TextField txtContrasenia;
-
-    @FXML
     void crearCuentaAction(ActionEvent event) throws CuentaException, VendedorException {
         crearCuentaVendedorAction();
     }
 
-    private void crearCuentaVendedorAction() throws CuentaException, VendedorException{
-        System.out.println("hola");
+    @FXML
+    void volverAction(ActionEvent event) {
+        ModelFactoryController.getInstance().volverInicioSesion();;
+    }
+
+    private void crearCuentaVendedorAction() throws CuentaException, VendedorException {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
         String usuario = txtUsuario.getText();
         String contrasenia = txtContrasenia.getText();
-        System.out.println("hola");
 
-            if (verificarCampos(nombre, apellido, cedula, direccion, usuario, contrasenia)){
-                System.out.println("funciono");
-                if(modelFactoryController.getInstance().crearVendedor(nombre,apellido, cedula,direccion, usuario, contrasenia)){
-                    limpiarCampos();
-                    mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
-                }else {
-                    mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
-                }
-            }else {
-                mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
-
+        if (verificarCampos(nombre, apellido, cedula, direccion, usuario, contrasenia)){
+            if(ModelFactoryController.getInstance().crearVendedor(nombre,apellido, cedula,direccion, usuario, contrasenia)){
+                limpiarCampos();
+                mostrarMensaje("Notificacion vendedor", "Vendedor creado", "El vendedor se a creado", Alert.AlertType.INFORMATION);
             }
-    }
-
-    private void limpiarCampos() {
-        txtNombre.clear();
-        txtApellido.clear();
-        txtCedula.clear();
-        txtDireccion.clear();
-        txtUsuario.clear();
-        txtContrasenia.clear();
+        }else {
+            mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
+        }
     }
 
     private boolean verificarCampos(String nombre, String apellido, String cedula, String direccion, String usuario, String contrasenia) {
@@ -107,13 +93,13 @@ public class CrearCuentaController {
         return true;
     }
 
-    @FXML
-    void volverAction(ActionEvent event) {
-        volverInicioSesion();
-    }
-
-    private void volverInicioSesion() {
-        ModelFactoryController.getInstance().volverInicioSesion();
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtApellido.clear();
+        txtCedula.clear();
+        txtDireccion.clear();
+        txtUsuario.clear();
+        txtContrasenia.clear();
     }
 
     public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
@@ -125,8 +111,5 @@ public class CrearCuentaController {
         DialogPane dialogPane = alert.getDialogPane();
         alert.showAndWait();
     }
-
-
-    //crear cuenta esta es bugeada despues se organiza
 
 }

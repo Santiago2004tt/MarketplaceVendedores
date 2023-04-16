@@ -54,8 +54,10 @@ public class ModelFactoryController {
         Vendedor vendedor = new Vendedor();
         vendedor.setCuenta(cuenta);
         vendedor.setNombre("jere");
+        vendedor.setCedula("1");
         vendedor.getListaProductos().add(producto);
 
+        marketplaceVendedores.getListaCuentas().add(cuenta);
         marketplaceVendedores.getListaVendedores().add(vendedor);
 
 
@@ -63,16 +65,18 @@ public class ModelFactoryController {
 
     }
 
-    public void iniciarSesion(String usuario, String contrasenia) throws VendedorException {
+    public void iniciarSesion(String usuario, String contrasenia){
         try {
             if(getInstance().marketplaceVendedores.verificarCuenta(usuario, contrasenia)){
+                System.out.println("aqui ta");
                 Vendedor vendedor = getInstance().marketplaceVendedores.buscarVendedorCuenta(usuario, contrasenia);
+                System.out.println(vendedor.getNombre());
                 getInstance().accederCuenta(vendedor);
             }else{
-                mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificacion vendedor", "cuenta no existe", "La cuenta no ha sido encontrada", Alert.AlertType.ERROR);
             }
         }catch (VendedorException e){
-            mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion vendedor", "Error", "Error", Alert.AlertType.ERROR);
 
         }
     }
@@ -85,38 +89,21 @@ public class ModelFactoryController {
         DialogPane dialogPane = alert.getDialogPane();
         alert.showAndWait();
     }
-    public boolean crearCuenta(String usuario, String contrasenia) throws CuentaException {
+
+    public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, String usuario, String  contrasenia) throws CuentaException, VendedorException {
+
         try {
             marketplaceVendedores.crearCuenta(usuario, contrasenia);
-            Persistencia.guardarCuentas(marketplaceVendedores.getListaCuentas());
-            return true;
-        } catch (CuentaException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+            Cuenta cuenta =marketplaceVendedores.buscarCuenta(usuario, contrasenia);
+            if(marketplaceVendedores.crearVendedor(nombre, apellido, cedula, direccion, cuenta)){
+                return true;
+            }
 
-    public Cuenta buscarCuenta(String usuario, String contrasenia) throws CuentaException {
-        Cuenta cuenta = null;
-        try {
-            cuenta = marketplaceVendedores.buscarCuenta(usuario, contrasenia);
-        } catch (CuentaException e) {
-            e.printStackTrace();
-        }
-        return cuenta;
-    }
-
-    public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, String usuario, String  contrasenia) {
-        try {
-            crearCuenta(usuario, contrasenia);
-            Cuenta cuenta = buscarCuenta(usuario,contrasenia);
-            marketplaceVendedores.crearVendedor(nombre, apellido, cedula, direccion, cuenta);
-            //Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-            return true;
-        } catch (VendedorException | CuentaException e) {
-            mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+        }catch (CuentaException e){
+            mostrarMensaje("Notificacion vendedor", "Cuenta ya existe", "La cuenta ya ha sido creada", Alert.AlertType.ERROR);
+        }catch (VendedorException e){
+            marketplaceVendedores.eliminarCuenta(usuario, contrasenia);
+            mostrarMensaje("Notificacion vendedor", "Vendedor ya existe", "El vendedor ya ha sido creado", Alert.AlertType.ERROR);
         }
         return false;
     }

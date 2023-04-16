@@ -116,16 +116,14 @@ public class MarketplaceVendedores implements Serializable {
      */
     public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws VendedorException {
         Vendedor vendedor = new Vendedor();
-        Muro muro = new Muro();
         vendedor.setNombre(nombre);
         vendedor.setApellido(apellido);
         vendedor.setCedula(cedula);
         vendedor.setDireccion(direccion);
         vendedor.setCuenta(cuenta);
-        vendedor.setMuro(muro);
 
         if(existeVendedor(cedula)){
-            throw new VendedorException("Cliente Hecho");
+            throw new VendedorException("vendedor ya existe");
         }
         getListaVendedores().add(vendedor);
         return true;
@@ -345,7 +343,7 @@ public class MarketplaceVendedores implements Serializable {
         cuenta.setUsuario(usuario);
         cuenta.setContrasenia(contrasenia);
 
-        if(existeCuenta(usuario, contrasenia)){
+        if(existeCuenta(usuario)){
             throw new CuentaException("cuenta Hecha");
         }
         getListaCuentas().add(cuenta);
@@ -358,7 +356,22 @@ public class MarketplaceVendedores implements Serializable {
      * Method that allows verifying the existence of a product through its code
      * @return
      */
-    private boolean existeCuenta(String usuario, String contrasenia) {
+    private boolean existeCuenta(String usuario) {
+        for (Cuenta cuenta : listaCuentas) {
+            if (cuenta.getUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * verifica la cuenta para iniciar sesion
+     * @param usuario
+     * @param contrasenia
+     * @return
+     */
+    private boolean verificarCuentaContrasenia(String usuario, String contrasenia) {
         for (Cuenta cuenta : listaCuentas) {
             if (cuenta.getUsuario().equals(usuario) && cuenta.getContrasenia().equals(contrasenia)) {
                 return true;
@@ -374,7 +387,7 @@ public class MarketplaceVendedores implements Serializable {
      * @return
      */
     public boolean actualizarProducto(String usuario, String contrasenia) throws CuentaException {
-        if(existeCuenta(usuario, contrasenia)){
+        if(existeCuenta(usuario)){
             Cuenta cuenta = buscarCuenta(usuario, contrasenia);
             cuenta.setContrasenia(contrasenia);
             return true;
@@ -389,7 +402,7 @@ public class MarketplaceVendedores implements Serializable {
      * @return
      */
     public boolean eliminarCuenta(String usuario, String contrasenia) throws CuentaException {
-        if (existeCuenta(usuario, contrasenia)) {
+        if (existeCuenta(usuario)) {
             Cuenta cuenta = buscarCuenta(usuario, contrasenia);
             getListaCuentas().remove(cuenta);
             return true;
@@ -406,7 +419,7 @@ public class MarketplaceVendedores implements Serializable {
      */
     public Cuenta buscarCuenta(String usario, String contrasenia) throws CuentaException {
         Cuenta cuentaEncontrado = null;
-        if (existeCuenta(usario, contrasenia)) {
+        if (existeCuenta(usario)) {
             for (Cuenta cuenta : getListaCuentas()) {
                 if (cuenta.getUsuario().equals(usario)) {
                     cuentaEncontrado = cuenta;
@@ -421,10 +434,8 @@ public class MarketplaceVendedores implements Serializable {
     }
 
     public boolean verificarCuenta(String usuario, String contrasenia) {
-        if(existeCuenta(usuario, contrasenia)){
-            return false;
-        }
-        return true;
+
+        return verificarCuentaContrasenia(usuario, contrasenia);
     }
 
     public Vendedor buscarVendedorCuenta(String usuario, String contrasenia) throws VendedorException {
