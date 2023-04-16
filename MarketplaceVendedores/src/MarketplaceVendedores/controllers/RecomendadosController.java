@@ -1,5 +1,6 @@
 package MarketplaceVendedores.controllers;
 
+import MarketplaceVendedores.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,16 +14,16 @@ public class RecomendadosController {
     private Tab tabRecomendados;
 
     @FXML
-    private TableColumn<?, ?> columNombreSolicitud;
+    private TableColumn<Vendedor, String> columNombreSolicitud;
 
     @FXML
-    private TableView<?> tablaVendedoresAliados;
+    private TableView<Vendedor> tablaVendedoresAliados;
 
     @FXML
-    private TableColumn<?, ?> columnNombreVendedor;
+    private TableColumn<Vendedor, String> columnNombreVendedor;
 
     @FXML
-    private TableView<?> tablaSolicitudes;
+    private TableView<Vendedor> tablaSolicitudes;
 
     @FXML
     private Button btnEnviarSolicitud;
@@ -34,13 +35,13 @@ public class RecomendadosController {
     private Tab tabVendedoresAliados;
 
     @FXML
-    private TableColumn<?, ?> columnApellidoVendedor;
+    private TableColumn<Vendedor, String> columnApellidoVendedor;
 
     @FXML
     private Tab tabSolicitudes;
 
     @FXML
-    private TableColumn<?, ?> columnApellidoRecomendados;
+    private TableColumn<Vendedor, String> columnApellidoRecomendados;
 
     @FXML
     private Button btnVolver;
@@ -55,13 +56,13 @@ public class RecomendadosController {
     private Button btnRechazar;
 
     @FXML
-    private TableColumn<?, ?> columnNombreRecomendados;
+    private TableColumn<Vendedor, String> columnNombreRecomendados;
 
     @FXML
-    private TableColumn<?, ?> columApellidoSolicitud;
+    private TableColumn<Vendedor, String> columApellidoSolicitud;
 
     @FXML
-    private TableView<?> tablaRecomendados;
+    private TableView<Vendedor> tablaRecomendados;
 
     @FXML
     void visitarAction(ActionEvent event) {
