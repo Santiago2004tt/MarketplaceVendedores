@@ -38,6 +38,9 @@ public class MarketplaceVendedores implements Serializable {
         listaCuentas = new ArrayList<Cuenta>();
     }
 
+    public MarketplaceVendedores() {
+    }
+
     /**
      * set y get de nombre
      *  -------------------------
@@ -110,7 +113,7 @@ public class MarketplaceVendedores implements Serializable {
      * @return
      * @throws Exception
      */
-    public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws Exception {
+    public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) throws VendedorException {
         Vendedor vendedor = new Vendedor();
         Muro muro = new Muro();
         vendedor.setNombre(nombre);
@@ -121,7 +124,7 @@ public class MarketplaceVendedores implements Serializable {
         vendedor.setMuro(muro);
 
         if(existeVendedor(cedula)){
-            throw new Exception("Cliente Hecho");
+            throw new VendedorException("Cliente Hecho");
         }
         getListaVendedores().add(vendedor);
         return true;

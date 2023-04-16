@@ -1,6 +1,8 @@
 package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.application.Main;
+import MarketplaceVendedores.model.Vendedor;
+import MarketplaceVendedores.test.Miguel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,30 +21,17 @@ public class LoginVendedorController {
     private Button btnCrearCuenta;
     @FXML
     private PasswordField txtVendedorPassword;
+
     @FXML
     void crearCuentaAction(ActionEvent event) {
 
     }
     @FXML
     void logInAction(ActionEvent event) {
-        main.mostrarMainVendedor();
+        Miguel.getInstance().mostrarMainVendedor(new Vendedor());
     }
 
-    private void iniciarSesionVendedor(ActionEvent event){
-        String user= "";
-        String passWord= "";
-        user = txtVendedorUser.getText();
-        passWord= txtVendedorPassword.getText();
 
-
-    }
-
-    private boolean verificarCampos(String usuario, String contrasena) {
-        if(usuario.equals("")||contrasena.equals("")){
-            return false;
-        }
-        return true;
-    }
     public void setMain(Main main) {
         this.main = main;
     }
