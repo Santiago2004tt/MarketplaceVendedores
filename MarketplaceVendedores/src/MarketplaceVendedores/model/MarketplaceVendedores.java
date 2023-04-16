@@ -4,6 +4,7 @@ import MarketplaceVendedores.exceptions.*;
 
 import javafx.scene.image.Image;
 import java.io.Serializable;
+import java.sql.Struct;
 import java.util.ArrayList;
 
 /**
@@ -419,4 +420,24 @@ public class MarketplaceVendedores implements Serializable {
         return cuentaEncontrado;
     }
 
+    public boolean verificarCuenta(String usuario, String contrasenia) {
+        if(existeCuenta(usuario, contrasenia)){
+            return false;
+        }
+        return true;
+    }
+
+    public Vendedor buscarVendedorCuenta(String usuario, String contrasenia) throws VendedorException {
+        Vendedor vendedorAux = null;
+
+        for (Vendedor vendedor: listaVendedores) {
+            if(vendedor.getCuenta().getUsuario().equals(usuario)&&vendedor.getCuenta().getContrasenia().equals(contrasenia)){
+                vendedorAux= vendedor;
+            }
+        }
+        if(vendedorAux == null){
+            throw new VendedorException("el vendedor no se a encontrado");
+        }
+        return vendedorAux;
+    }
 }

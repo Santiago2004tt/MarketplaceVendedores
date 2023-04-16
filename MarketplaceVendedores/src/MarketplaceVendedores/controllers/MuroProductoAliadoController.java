@@ -92,9 +92,9 @@ public class MuroProductoAliadoController {
     }
 
     public void aniadirProducto(Producto producto, Vendedor vendedorLogeado, Vendedor vendedorAliado){
-        producto = producto;
-        vendedorLogeado = vendedorLogeado;
-        vendedorAliado = vendedorAliado;
+        this.producto = producto;
+        this.vendedorLogeado = vendedorLogeado;
+        this.vendedorAliado = vendedorAliado;
         imgProducto.setImage(producto.getImage());
         txtNombre.setText(producto.getNombre());
         txtCategoria.setText(producto.getCategoria());

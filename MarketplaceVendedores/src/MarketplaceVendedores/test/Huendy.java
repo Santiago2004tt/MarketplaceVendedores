@@ -2,7 +2,6 @@ package MarketplaceVendedores.test;
 
 import MarketplaceVendedores.Persistencia.Persistencia;
 import MarketplaceVendedores.application.Main;
-import MarketplaceVendedores.controllers.MainViewVendedorController;
 import MarketplaceVendedores.exceptions.CuentaException;
 import MarketplaceVendedores.exceptions.VendedorException;
 import MarketplaceVendedores.model.Cuenta;
@@ -78,41 +77,9 @@ public class Huendy {
      * parte de crearCuenta  y recomendados para implementar
      */
 
-    public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, Cuenta cuenta) {
-        try {
-            marketplaceVendedores.crearVendedor(nombre, apellido, cedula, direccion, cuenta);
-            Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-            return true;
-        } catch (VendedorException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    public boolean crearCuenta(String usuario, String contrasenia) throws CuentaException {
-        try {
-            marketplaceVendedores.crearCuenta(usuario, contrasenia);
-            Persistencia.guardarCuentas(marketplaceVendedores.getListaCuentas());
-            return true;
-        } catch (CuentaException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    public Cuenta buscarCuenta(String usuario, String contrasenia) throws CuentaException {
-        Cuenta cuenta = null;
-        try {
-            cuenta = marketplaceVendedores.buscarCuenta(usuario, contrasenia);
-        } catch (CuentaException e) {
-            e.printStackTrace();
-        }
-        return cuenta;
-    }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
