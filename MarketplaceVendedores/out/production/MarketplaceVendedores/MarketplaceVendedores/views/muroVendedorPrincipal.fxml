@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MainViewVendedorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.MuroVendedorPrincipalController">
    <top>
       <AnchorPane prefHeight="123.0" prefWidth="600.0" style="-fx-background-color: #5905F6;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="178.0" layoutY="49.0" text="Bienvenido Vendedor " textFill="WHITE">
+            <Label fx:id="labelBienvenidaVendedor" layoutX="178.0" layoutY="49.0" text="Bienvenido Vendedor " textFill="WHITE">
                <font>
                   <Font name="Times New Roman Italic" size="22.0" />
                </font>
@@ -41,17 +41,19 @@
                                           <Font name="Times New Roman Italic" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="113.0" layoutY="79.0" text="Direccion:" textFill="WHITE" />
-                                    <Label layoutX="68.0" layoutY="128.0" prefHeight="27.0" prefWidth="169.0" text="Vendedores Aliados:" textFill="WHITE" />
                                     <ImageView blendMode="HARD_LIGHT" fitHeight="85.0" fitWidth="88.0" layoutX="487.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Img/IconVendedor.png" />
                                        </image>
                                     </ImageView>
+                                    <Label fx:id="labelNombreVendedor" layoutX="119.0" layoutY="66.0" text="Nombre:" textFill="WHITE" />
+                                    <Label fx:id="labelApellidoVendedor" layoutX="119.0" layoutY="110.0" text="Apellido:" textFill="WHITE" />
+                                    <Label fx:id="labelCedulaVendedor" layoutX="122.0" layoutY="158.0" text="Cedula: " textFill="WHITE" />
+                                    <Label fx:id="labelDirecionVendedor" layoutX="112.0" layoutY="199.0" text="Direccion: " textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                               <Separator layoutX="-6.0" layoutY="377.0" prefHeight="3.0" prefWidth="724.0" />
-                              <Button layoutX="271.0" layoutY="390.0" mnemonicParsing="false" text="Vendedores Aliados" />
+                              <Button fx:id="btnVendedoresAliados" layoutX="271.0" layoutY="390.0" mnemonicParsing="false" onAction="#VendedoresAliadosAction" text="Vendedores Aliados" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -65,13 +67,13 @@
                                     <Font name="Times New Roman Italic" size="20.0" />
                                  </font>
                               </Label>
-                              <TableView layoutX="41.0" layoutY="65.0" prefHeight="316.0" prefWidth="623.0">
+                              <TableView fx:id="tblProductos" layoutX="41.0" layoutY="65.0" prefHeight="316.0" prefWidth="623.0">
                                 <columns>
-                                  <TableColumn prefWidth="97.0" text="Nombre" />
-                                  <TableColumn prefWidth="85.0" text="Codigo" />
+                                  <TableColumn fx:id="columnNombre" prefWidth="97.0" text="Nombre" />
+                                  <TableColumn fx:id="columnCodigo" prefWidth="85.0" text="Codigo" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="311.0" layoutY="408.0" mnemonicParsing="false" text="Muro Productos" />
+                              <Button fx:id="btnMuroProductos" layoutX="311.0" layoutY="408.0" mnemonicParsing="false" onAction="#MuroProductosAction" text="Muro Productos" />
                               <Separator layoutX="1.0" layoutY="389.0" prefHeight="3.0" prefWidth="724.0" />
                            </children>
                         </AnchorPane>
