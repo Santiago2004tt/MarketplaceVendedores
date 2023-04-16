@@ -54,6 +54,7 @@
                               </AnchorPane>
                               <Separator layoutX="-6.0" layoutY="377.0" prefHeight="3.0" prefWidth="724.0" />
                               <Button fx:id="btnVendedoresAliados" layoutX="271.0" layoutY="390.0" mnemonicParsing="false" onAction="#VendedoresAliadosAction" text="Vendedores Aliados" />
+                              <Button fx:id="btnSalir" layoutX="14.0" layoutY="390.0" mnemonicParsing="false" onAction="#salirVendedorAction" prefHeight="25.0" prefWidth="62.0" text="Salir" />
                            </children>
                         </AnchorPane>
                   </content>
