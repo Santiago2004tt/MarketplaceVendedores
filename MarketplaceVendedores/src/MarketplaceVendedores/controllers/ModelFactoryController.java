@@ -11,8 +11,8 @@ public class ModelFactoryController {
 
     MarketplaceVendedores marketplaceVendedores;
 
-    private static class SingletonHolder {
-        private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+    public static class SingletonHolder {
+        public final static ModelFactoryController eINSTANCE = new ModelFactoryController();
     }
 
     public static ModelFactoryController getInstance() {

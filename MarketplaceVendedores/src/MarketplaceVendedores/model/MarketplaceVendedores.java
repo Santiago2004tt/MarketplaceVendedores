@@ -2,7 +2,7 @@ package MarketplaceVendedores.model;
 
 import MarketplaceVendedores.exceptions.*;
 
-import java.awt.*;
+import javafx.scene.image.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 
