@@ -28,6 +28,10 @@ public class Comentario implements MuroInterface, Serializable {
         this.mensaje = mensaje;
     }
 
+    public Comentario(){
+
+    }
+
     /**
      * set y get de mensaje
      * ----------------------------

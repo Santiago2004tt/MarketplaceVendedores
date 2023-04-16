@@ -1,15 +1,16 @@
 package MarketplaceVendedores.controllers;
 
 
-import MarketplaceVendedores.Persistencia.Persistencia;
 import MarketplaceVendedores.application.Main;
 import MarketplaceVendedores.exceptions.CuentaException;
+import MarketplaceVendedores.exceptions.ProductoExceptions;
 import MarketplaceVendedores.exceptions.VendedorException;
 import MarketplaceVendedores.model.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
-
-import java.io.IOException;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 
 public class ModelFactoryController {
 
@@ -25,8 +26,26 @@ public class ModelFactoryController {
     }
 
     public void visitarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
-        main.mostrarMuroProducto(productosVendedor, vendedorLoggeado);
+        main.mostrarMuroProductoLogeado(productosVendedor, vendedorLoggeado);
     }
+
+    public void visitarCrearProducto(Vendedor vendedorLogeado) {
+        main.mostrarCrearProducto(vendedorLogeado);
+    }
+
+    public boolean crearProducto(String nombre, String codigo, String categoria, double precioDefinitivo, Estado estado, String fecha, Image image, Vendedor vendedorLogeado) {
+        try {
+            if(marketplaceVendedores.crearProducto(nombre,codigo,categoria,precioDefinitivo,estado,image,fecha)){
+                Producto producto = marketplaceVendedores.buscarProducto(codigo);
+                vendedorLogeado.getListaProductos().add(producto);
+                return true;
+            }
+        } catch (ProductoExceptions e) {
+            mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
+        }
+        return false;
+    }
+
 
     public static class SingletonHolder {
         public final static ModelFactoryController eINSTANCE = new ModelFactoryController();
@@ -45,13 +64,16 @@ public class ModelFactoryController {
 
     private void inicializarDatos() {
 
-        Muro muro = new Muro();
         marketplaceVendedores = new MarketplaceVendedores("Hola");
-        Cuenta cuenta = new Cuenta("juan", "123");
+        Muro muro = new Muro();
         Producto producto = new Producto();
-        producto.setNombre("papas");
-        producto.setMuro(muro);
+        Comentario comentario = new Comentario();
         Vendedor vendedor = new Vendedor();
+        comentario.setMensaje("alguien: hola");
+        Cuenta cuenta = new Cuenta("juan", "123");
+        producto.setNombre("papas");
+        muro.getListaComentarios().add(comentario);
+        producto.setMuro(muro);
         vendedor.setCuenta(cuenta);
         vendedor.setNombre("jere");
         vendedor.setCedula("1");
@@ -60,7 +82,6 @@ public class ModelFactoryController {
         marketplaceVendedores.getListaCuentas().add(cuenta);
         marketplaceVendedores.getListaVendedores().add(vendedor);
 
-
         System.out.println("la empresa: "+marketplaceVendedores.getNombre() +" ya se a inicializado");
 
     }
@@ -68,9 +89,7 @@ public class ModelFactoryController {
     public void iniciarSesion(String usuario, String contrasenia){
         try {
             if(getInstance().marketplaceVendedores.verificarCuenta(usuario, contrasenia)){
-                System.out.println("aqui ta");
                 Vendedor vendedor = getInstance().marketplaceVendedores.buscarVendedorCuenta(usuario, contrasenia);
-                System.out.println(vendedor.getNombre());
                 getInstance().accederCuenta(vendedor);
             }else{
                 mostrarMensaje("Notificacion vendedor", "cuenta no existe", "La cuenta no ha sido encontrada", Alert.AlertType.ERROR);
@@ -108,7 +127,7 @@ public class ModelFactoryController {
         return false;
     }
 
-    private void accederCuenta(Vendedor vendedor) {
+    public void accederCuenta(Vendedor vendedor) {
         main.mostrarMainVendedor(vendedor);
     }
 

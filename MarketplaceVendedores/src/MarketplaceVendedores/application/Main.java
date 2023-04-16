@@ -16,10 +16,10 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Stage stage;
+    private Image IconMarket = new Image("IconMarket.jpg");
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        Image IconMarket = new Image("IconMarket.jpg");
         stage.getIcons().add(IconMarket);
         MostrarLoginVendedor();
 
@@ -29,6 +29,7 @@ public class Main extends Application {
         try {
             stage.close();
             stage = new Stage();
+            stage.getIcons().add(IconMarket);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/LoginVendedor.fxml"));
             BorderPane borderPane = loader.load();
@@ -47,6 +48,7 @@ public class Main extends Application {
         try {
             stage.close();
             stage = new Stage();
+            stage.getIcons().add(IconMarket);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/muroVendedorPrincipal.fxml"));
             BorderPane borderPane = loader.load();
@@ -65,6 +67,7 @@ public class Main extends Application {
         try {
             stage.close();
             stage = new Stage();
+            stage.getIcons().add(IconMarket);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/CrearCuenta.fxml"));
             AnchorPane rootLayout = loader.load();
@@ -82,6 +85,7 @@ public class Main extends Application {
         try {
             stage.close();
             stage = new Stage();
+            stage.getIcons().add(IconMarket);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../views/vendedoresAliadosRecomendados.fxml"));
             AnchorPane rootLayout = loader.load();
@@ -95,15 +99,35 @@ public class Main extends Application {
         }
     }
 
-    public void mostrarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
+    public void mostrarMuroProductoLogeado(Producto productosVendedor, Vendedor vendedorLoggeado) {
         try {
             stage.close();
             stage = new Stage();
+            stage.getIcons().add(IconMarket);
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../views/MuroProductoAliado.fxml"));
+            loader.setLocation(Main.class.getResource("../views/MuroProductoLoggeado.fxml"));
+            BorderPane borderPane = loader.load();
+            MuroProductoLoggeadoController controller = loader.getController();
+            controller.aniadirProducto(productosVendedor, vendedorLoggeado);
+            Scene scene = new Scene(borderPane);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarCrearProducto(Vendedor vendedorLogeado) {
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/CrearProducto.fxml"));
             AnchorPane rootLayout = loader.load();
-            MuroProductoAliadoController controller = loader.getController();
-            controller.aniadirProducto(productosVendedor, vendedorLoggeado, vendedorLoggeado);
+            CrearProductoController controller = loader.getController();
+            controller.inicializarVendedor(vendedorLogeado);
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
             stage.setTitle("Marketplace Vendedores");
