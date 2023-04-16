@@ -1,5 +1,6 @@
 package MarketplaceVendedores.Persistencia;
 
+import MarketplaceVendedores.model.Cuenta;
 import MarketplaceVendedores.model.Vendedor;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Persistencia {
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/resources/archivoEmpleados.txt";
 
-    public static void guardarEmpleados(ArrayList<Vendedor> listaVendedores) throws IOException {
+    public static void guardarVendedores(ArrayList<Vendedor> listaVendedores) throws IOException {
 
         String contenido = "";
 
@@ -34,5 +35,17 @@ public class Persistencia {
             vendedores.add(vendedor);
         }
         return vendedores;
+    }
+
+//    ---------------------------Cuenta--------------------------
+
+    public static void guardarCuentas(ArrayList<Cuenta> listaCuenta) throws IOException {
+
+        String contenido = "";
+
+        for (Cuenta cuenta : listaCuenta) {
+            contenido += cuenta.getUsuario() +"\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
     }
 }

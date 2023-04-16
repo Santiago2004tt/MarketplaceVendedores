@@ -1,6 +1,6 @@
 package MarketplaceVendedores.model;
 
-import java.awt.*;
+import javafx.scene.image.Image;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,13 +24,14 @@ public class Producto implements Serializable {
     private Estado estado;
     private Image image;
     private String date;
+    private Muro muro;
 
     /**
      * Constructor
      * -----------
      * Builder
      */
-    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date) {
+    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date, Muro muro) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.categoria = categoria;
@@ -38,6 +39,7 @@ public class Producto implements Serializable {
         this.estado = estado;
         this.image = image;
         this.date = date;
+        this.muro = muro;
     }
 
     /**
@@ -123,6 +125,7 @@ public class Producto implements Serializable {
      * get y set de imagen
      * ------------------
      * Getter and Setter the image
+     *
      * @return
      */
     public Image getImage() {
@@ -145,6 +148,20 @@ public class Producto implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    /**
+     * get y set de muro
+     * --------------------
+     * Getter and Setter the muro
+     * @return
+     */
+    public Muro getMuro() {
+        return muro;
+    }
+
+    public void setMuro(Muro muro) {
+        this.muro = muro;
     }
 
     @Override

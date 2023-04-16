@@ -1,25 +1,24 @@
 package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.application.Main;
+import MarketplaceVendedores.model.Comentario;
 import MarketplaceVendedores.model.Producto;
 import MarketplaceVendedores.model.Vendedor;
 import MarketplaceVendedores.test.Miguel;
+import com.sun.webkit.Timer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MuroVendedorPrincipalController {
 
     private Main main;
 
-    Vendedor vendedorLoggeado=null;
-    Producto productosVendedor =null;
+    Vendedor vendedorLoggeado;
+    Producto productosVendedor;
 
     ObservableList<Producto> listaProductosData = FXCollections.observableArrayList();
 
@@ -37,6 +36,8 @@ public class MuroVendedorPrincipalController {
 
     @FXML
     private Button btnMuroProductos;
+    @FXML
+    private Button btnSalir;
 
     @FXML
     private Label labelDirecionVendedor;
@@ -54,21 +55,48 @@ public class MuroVendedorPrincipalController {
     private Label labelCedulaVendedor;
 
     @FXML
-    void VendedoresAliadosAction(ActionEvent event) {
-        //Miguel.getInstance().mostrarMuroVendedorAliado
+    void salirVendedorAction(ActionEvent event) {
+        salirVendedor();
     }
+
+    private void salirVendedor() {
+        ModelFactoryController.getInstance().volverInicioSesion();
+    }
+
+    @FXML
+    void VendedoresAliadosAction(ActionEvent event) {
+        visitarVendedorAction();
+    }
+
+    private void visitarVendedorAction() {
+        ModelFactoryController.getInstance().visitarVendedoresAction(vendedorLoggeado);
+    }
+
     @FXML
     void MuroProductosAction(ActionEvent event) {
-        //Miguel.getInstance().mostrarMuroProducto
+        visitarMuroProducto();
+    }
+
+    private void visitarMuroProducto() {
+        if(productosVendedor != null){
+            ModelFactoryController.getInstance().visitarMuroProducto(productosVendedor, vendedorLoggeado);
+        }else{
+            mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
     void initialize(){
-        this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
-        this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("Codigo"));
+        this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         tblProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
             productosVendedor = newSelection;
         });
+    }
+
+    private ObservableList<Producto> obtenerListaProductos() {
+        listaProductosData.addAll(vendedorLoggeado.getListaProductos());
+        return listaProductosData;
     }
     public void aniadirVendedor (Vendedor vendedorLoggeado){
         this.vendedorLoggeado = vendedorLoggeado;
@@ -77,12 +105,17 @@ public class MuroVendedorPrincipalController {
         this.labelBienvenidaVendedor.setText("Bienvenido Vendedor " + vendedorLoggeado.getNombre());
         this.labelCedulaVendedor.setText("Cedula: " + vendedorLoggeado.getCedula());
         this.labelDirecionVendedor.setText("Direccion: " + vendedorLoggeado.getDireccion());
+        tblProductos.getItems().clear();
+        tblProductos.setItems(obtenerListaProductos());
     }
 
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
 
-
-    public void setMain(Main main , Vendedor vendedor) {
-        this.main = main;
-        this.vendedorLoggeado = vendedor;
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        alert.showAndWait();
     }
 }
