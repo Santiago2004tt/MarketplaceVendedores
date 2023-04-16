@@ -50,7 +50,7 @@ public class Miguel {
             loader.setLocation(Main.class.getResource("../views/muroVendedorPrincipal.fxml"));
             BorderPane borderPane = loader.load();
             MuroVendedorPrincipalController controller = loader.getController();
-            controller.setMain(this, vendedor);
+            //controller.setMain(this, vendedor);
             controller.aniadirVendedor(vendedor);
             Scene scene = new Scene(borderPane);
             stage.setScene(scene);
@@ -66,7 +66,7 @@ public class Miguel {
             loader.setLocation(Main.class.getResource("../views/LoginVendedor.fxml"));
             BorderPane borderPane = loader.load();
             LoginVendedorController controller = loader.getController();
-            controller.setMain(this);
+            //controller.setMain(this);
             Scene scene = new Scene(borderPane);
             stage.setScene(scene);
             stage.setTitle("Marketplace Vendedores");

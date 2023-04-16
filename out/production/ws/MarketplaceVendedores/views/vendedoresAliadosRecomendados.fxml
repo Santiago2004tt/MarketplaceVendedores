@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -12,28 +17,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="531.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.RecomendadosController">
+<AnchorPane prefHeight="531.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.RecomendadosController">
    <children>
       <Pane prefHeight="537.0" prefWidth="748.0" style="-fx-background-color: #5905F6;">
          <children>
             <TabPane cache="true" layoutX="13.0" layoutY="135.0" prefHeight="331.0" prefWidth="722.0" style="-fx-background-color: #3B1A77;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                  <Tab fx:id="vendedoresAliados" style="-fx-background-color: #6987cf;" text="Vendedores aliados">
+                  <Tab fx:id="tabVendedoresAliados" style="-fx-background-color: #6987cf;" text="Vendedores aliados">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="718.0" style="-fx-background-color: #3B1A77;">
                            <children>
                               <TableView fx:id="tablaVendedoresAliados" layoutX="135.0" layoutY="45.0" prefHeight="241.0" prefWidth="444.0">
                                 <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                                  <TableColumn fx:id="apellido" prefWidth="75.0" text="Apellido" />
+                                  <TableColumn fx:id="columnNombreVendedor" prefWidth="75.0" text="Nombre" />
+                                  <TableColumn fx:id="columnApellidoVendedor" prefWidth="75.0" text="Apellido" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="visitar" layoutX="620.0" layoutY="78.0" mnemonicParsing="false" onAction="#visitarAction" style="-fx-background-color: #5905F6;" text="Visitar" textFill="WHITE">
+                              <Button fx:id="btnVisitar" layoutX="620.0" layoutY="78.0" mnemonicParsing="false" onAction="#visitarAction" style="-fx-background-color: #5905F6;" text="Visitar" textFill="WHITE">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="chat" layoutX="620.0" layoutY="166.0" mnemonicParsing="false" onAction="#chatAction" style="-fx-background-color: #5905F6;" text="Chat" textFill="WHITE">
+                              <Button fx:id="btnChat" layoutX="620.0" layoutY="166.0" mnemonicParsing="false" onAction="#chatAction" style="-fx-background-color: #5905F6;" text="Chat" textFill="WHITE">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
@@ -42,22 +47,22 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="solicitudes" style="-fx-background-color: #6987cf;" text="Solicitudes">
+                  <Tab fx:id="tabSolicitudes" style="-fx-background-color: #6987cf;" text="Solicitudes">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3B1A77;">
                            <children>
-                              <TableView fx:id="tablaSolicitudes" layoutX="130.0" layoutY="45.0" prefHeight="240.0" prefWidth="445.0">
+                              <TableView fx:id="tablaSolicitudes" layoutX="127.0" layoutY="31.0" prefHeight="240.0" prefWidth="445.0">
                                 <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                                  <TableColumn fx:id="apellido" prefWidth="75.0" text="Apellido" />
+                                  <TableColumn fx:id="columNombreSolicitud" prefWidth="75.0" text="Nombre" />
+                                  <TableColumn fx:id="columApellidoSolicitud" prefWidth="75.0" text="Apellido" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="aceptar" layoutX="619.0" layoutY="67.0" mnemonicParsing="false" onAction="#aceptarSolicitudAction" style="-fx-background-color: #5905F6;" text="Aceptar" textFill="WHITE">
+                              <Button fx:id="btnAceptar" layoutX="619.0" layoutY="67.0" mnemonicParsing="false" onAction="#aceptarSolicitudAction" style="-fx-background-color: #5905F6;" text="Aceptar" textFill="WHITE">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="rechazar" layoutX="622.0" layoutY="165.0" mnemonicParsing="false" onAction="#rechazarSolicitudAction" style="-fx-background-color: #5905F6;" text="Rechazar" textFill="WHITE">
+                              <Button fx:id="btnRechazar" layoutX="622.0" layoutY="165.0" mnemonicParsing="false" onAction="#rechazarSolicitudAction" style="-fx-background-color: #5905F6;" text="Rechazar" textFill="WHITE">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
@@ -66,17 +71,17 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="recomendados" style="-fx-background-color: #6987cf;" text="Recomendados">
+                  <Tab fx:id="tabRecomendados" style="-fx-background-color: #6987cf;" text="Recomendados">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="579.0" style="-fx-background-color: #3B1A77;">
                            <children>
                               <TableView fx:id="tablaRecomendados" layoutX="133.0" layoutY="44.0" prefHeight="243.0" prefWidth="442.0">
                                 <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                                  <TableColumn fx:id="apellido" prefWidth="75.0" text="Apellido" />
+                                  <TableColumn fx:id="columnNombreRecomendados" prefWidth="75.0" text="Nombre" />
+                                  <TableColumn fx:id="columnApellidoRecomendados" prefWidth="75.0" text="Apellido" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="enviarSolicitud" layoutX="591.0" layoutY="108.0" mnemonicParsing="false" onAction="#enviarSolicitudAction" style="-fx-background-color: #5905F6;" text="Enviar Solicitud" textFill="WHITE">
+                              <Button fx:id="btnEnviarSolicitud" layoutX="591.0" layoutY="108.0" mnemonicParsing="false" onAction="#enviarSolicitudAction" style="-fx-background-color: #5905F6;" text="Enviar Solicitud" textFill="WHITE">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
@@ -95,7 +100,7 @@
                   <Font name="Times New Roman" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="volver" layoutX="336.0" layoutY="498.0" mnemonicParsing="false" onAction="#volverAction" prefHeight="22.0" prefWidth="69.0" style="-fx-background-color: #3B1A77;" text="Volver" textFill="WHITE">
+            <Button fx:id="btnVolver" layoutX="336.0" layoutY="498.0" mnemonicParsing="false" onAction="#volverAction" prefHeight="22.0" prefWidth="69.0" style="-fx-background-color: #3B1A77;" text="Volver" textFill="WHITE">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>

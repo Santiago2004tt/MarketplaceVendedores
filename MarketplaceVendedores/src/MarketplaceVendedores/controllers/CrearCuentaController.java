@@ -9,15 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 
 public class CrearCuentaController {
 
-    private Huendy huendy;
+    private ModelFactoryController modelFactoryController;
 
-    Vendedor vendedor;
-
-    private Cuenta cuentaLogeada = null;
     @FXML
     private TextField txtNombre;
 
@@ -48,42 +46,27 @@ public class CrearCuentaController {
     }
 
     private void crearCuentaVendedorAction() throws CuentaException, VendedorException{
+        System.out.println("hola");
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
         String usuario = txtUsuario.getText();
         String contrasenia = txtContrasenia.getText();
-        try{
+        System.out.println("hola");
+
             if (verificarCampos(nombre, apellido, cedula, direccion, usuario, contrasenia)){
-                huendy.getInstance().crearCuenta(usuario, contrasenia);
-                Cuenta cuenta = huendy.getInstance().buscarCuenta(usuario,contrasenia);
-                boolean registroCompleto = huendy.getInstance().crearVendedor(nombre,apellido, cedula,direccion, cuenta);
                 System.out.println("funciono");
-                if(registroCompleto){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Listo!!");
-                    alert.setContentText("registro creado");
-                    alert.showAndWait();
+                if(modelFactoryController.getInstance().crearVendedor(nombre,apellido, cedula,direccion, usuario, contrasenia)){
                     limpiarCampos();
+                    mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
                 }else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Error");
-                    alert.setContentText("no fue posible terminar el registro");
-                    alert.showAndWait();
+                    mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
                 }
             }else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Error");
-                alert.setContentText("Rellena los campos de texto faltantes y vuelve a intentar");
-                alert.showAndWait();
+                mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+
             }
-        } catch (CuentaException e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Error");
-            alert.setContentText("Rellena los campos de texto faltantes y vuelve a intentar");
-            alert.showAndWait();
-        }
     }
 
     private void limpiarCampos() {
@@ -126,14 +109,24 @@ public class CrearCuentaController {
 
     @FXML
     void volverAction(ActionEvent event) {
-        huendy.MostrarMuroVendedorPrincipal();
+        volverInicioSesion();
     }
 
-    public void setMain(Huendy huendy) {
-        this.huendy = huendy;
+    private void volverInicioSesion() {
+        ModelFactoryController.getInstance().volverInicioSesion();
     }
 
-    public void obtenerVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        alert.showAndWait();
     }
+
+
+    //crear cuenta esta es bugeada despues se organiza
+
 }
