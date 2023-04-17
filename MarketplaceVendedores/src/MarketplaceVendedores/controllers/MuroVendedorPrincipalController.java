@@ -2,6 +2,7 @@ package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.application.Main;
 import MarketplaceVendedores.model.Comentario;
+import MarketplaceVendedores.model.Estado;
 import MarketplaceVendedores.model.Producto;
 import MarketplaceVendedores.model.Vendedor;
 import MarketplaceVendedores.test.Miguel;
@@ -30,6 +31,14 @@ public class MuroVendedorPrincipalController {
 
     @FXML
     private TableColumn<Producto, String> columnNombre;
+    @FXML
+    private TableColumn<Estado, Estado> columnEstado;
+
+    @FXML
+    private TableColumn<Producto, Double> columnPrecio;
+
+    @FXML
+    private TableColumn<Producto, ?> columnCategoria;
 
     @FXML
     private Button btnVendedoresAliados;
@@ -97,6 +106,9 @@ public class MuroVendedorPrincipalController {
     void initialize(){
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        this.columnCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        this.columnPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        this.columnEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
         tblProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection, newSelection) -> {
             productosVendedor = newSelection;
         });

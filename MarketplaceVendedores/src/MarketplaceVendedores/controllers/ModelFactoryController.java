@@ -1,6 +1,7 @@
 package MarketplaceVendedores.controllers;
 
 
+import MarketplaceVendedores.Persistencia.Persistencia;
 import MarketplaceVendedores.application.Main;
 import MarketplaceVendedores.exceptions.CuentaException;
 import MarketplaceVendedores.exceptions.ProductoExceptions;
@@ -11,6 +12,8 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Window;
+
+import java.io.IOException;
 
 public class ModelFactoryController {
 
@@ -56,9 +59,14 @@ public class ModelFactoryController {
     }
 
     public ModelFactoryController() {
+        iniciarSalvarDatosPrueba();
+        cargarResourceXML();
+        cargarResourceBinario();
 
         if(marketplaceVendedores==null) {
             inicializarDatos();
+            guardarResourceXML();
+            guardarResourceBinario();
         }
     }
 
@@ -85,6 +93,49 @@ public class ModelFactoryController {
         System.out.println("la empresa: "+marketplaceVendedores.getNombre() +" ya se a inicializado");
 
     }
+
+    //-------------------------------------Serializable y XML------------------------------------------
+
+    private void iniciarSalvarDatosPrueba() {
+        inicializarDatos();
+        try {
+            Persistencia.guardarVendedores(getMarketplaceVendedores().getListaVendedores());
+
+            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private void cargarDatosDesdeArchivos() {
+        marketplaceVendedores = new MarketplaceVendedores();
+        try {
+            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarResourceBinario() {
+
+        marketplaceVendedores = Persistencia.cargarRecursoBancoBinario();
+    }
+    public void guardarResourceBinario() {
+
+        Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
+    }
+    public void cargarResourceXML() {
+
+        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
+    }
+    public void guardarResourceXML() {
+
+        Persistencia.guardarRecursoBancoXML(marketplaceVendedores);
+    }
+    //--------------------------------------------------------------------------------------------------
 
     public void iniciarSesion(String usuario, String contrasenia){
         try {
@@ -125,6 +176,13 @@ public class ModelFactoryController {
             mostrarMensaje("Notificacion vendedor", "Vendedor ya existe", "El vendedor ya ha sido creado", Alert.AlertType.ERROR);
         }
         return false;
+    }
+
+    public MarketplaceVendedores getMarketplaceVendedores(){
+        return marketplaceVendedores;
+    }
+    public void setMarketplaceVendedores(MarketplaceVendedores marketplaceVendedores){
+        this.marketplaceVendedores = marketplaceVendedores;
     }
 
     public void accederCuenta(Vendedor vendedor) {

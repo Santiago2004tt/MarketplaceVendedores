@@ -10,6 +10,8 @@ import javafx.scene.control.TableView;
 
 public class RecomendadosController {
 
+    private Vendedor vendedorLogeado;
+
     @FXML
     private Tab tabRecomendados;
 
@@ -91,7 +93,14 @@ public class RecomendadosController {
 
     @FXML
     void volverAction(ActionEvent event) {
+        volverEvent();
+    }
 
+    private void volverEvent(){
+        ModelFactoryController.getInstance().accederCuenta(vendedorLogeado);
+    }
+    public void inicializarVendedor(Vendedor vendedorLogeado) {
+        this.vendedorLogeado = vendedorLogeado;
     }
 
 }

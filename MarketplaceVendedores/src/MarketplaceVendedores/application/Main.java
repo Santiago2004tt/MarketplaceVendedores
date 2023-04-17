@@ -81,7 +81,7 @@ public class Main extends Application {
         }
     }
 
-    public void mostrarVendedoresAliados(Vendedor vendedorLoggeado) {
+    public void mostrarVendedoresAliados(Vendedor vendedorLogeado) {
         try {
             stage.close();
             stage = new Stage();
@@ -90,6 +90,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../views/vendedoresAliadosRecomendados.fxml"));
             AnchorPane rootLayout = loader.load();
             RecomendadosController controller = loader.getController();
+            controller.inicializarVendedor(vendedorLogeado);
             Scene scene = new Scene(rootLayout);
             stage.setScene(scene);
             stage.setTitle("Marketplace Vendedores");
