@@ -43,6 +43,7 @@ public class ModelFactoryController {
                 vendedorLogeado.getListaProductos().add(producto);
                 Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
                 Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" a creado una publicacion", 1, "Creacion Publicacion");
+                Persistencia.guardarRecursoBinario(marketplaceVendedores);
                 return true;
             }
         } catch (ProductoExceptions e) {
@@ -65,13 +66,10 @@ public class ModelFactoryController {
 
     public ModelFactoryController() {
         iniciarSalvarDatosPrueba();
-        //cargarResourceXML();
-
-
         if(marketplaceVendedores==null) {
             inicializarDatos();
-            guardarResourceXML();
-            guardarResourceBinario();
+            Persistencia.guardarRecursoXML(marketplaceVendedores);
+            Persistencia.guardarRecursoBinario(marketplaceVendedores);
         }
 
     }
@@ -97,7 +95,7 @@ public class ModelFactoryController {
         producto.setDate("2023-04-14");
         producto.setCategoria("Verduras");
         producto.setCodigo("1");
-        producto.setImage(image);
+        //producto.setImage(image);
         producto.setMuro(muro);
         //aniadir datos al vendedor
         vendedor.setCuenta(cuenta);
@@ -110,7 +108,6 @@ public class ModelFactoryController {
         //aniadir datos al marketplace
         marketplaceVendedores.getListaCuentas().add(cuenta);
         marketplaceVendedores.getListaVendedores().add(vendedor);
-
         System.out.println("la empresa: "+marketplaceVendedores.getNombre() +" ya se a inicializado");
 
     }
@@ -118,7 +115,9 @@ public class ModelFactoryController {
     //-------------------------------------Serializable y XML------------------------------------------
 
     private void iniciarSalvarDatosPrueba() {
-        inicializarDatos();
+        this.marketplaceVendedores=Persistencia.cargarRecursoBinario();
+
+
         try {
             Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
 
@@ -144,18 +143,18 @@ public class ModelFactoryController {
 //
 //        marketplaceVendedores = Persistencia.cargarRecursoBancoBinario();
 //    }
-    public void guardarResourceBinario() {
-
-        Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
-    }
+//    public void guardarResourceBinario() {
+//
+//        Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
+//    }
 //    public void cargarResourceXML() {
 //
 //        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
 //    }
-    public void guardarResourceXML() {
-
-        Persistencia.guardarRecursoBancoXML(marketplaceVendedores);
-    }
+//    public void guardarResourceXML() {
+//
+//        Persistencia.guardarRecursoXML(marketplaceVendedores);
+//    }
     //--------------------------------------------------------------------------------------------------
 
     public void iniciarSesion(String usuario, String contrasenia){
@@ -193,6 +192,7 @@ public class ModelFactoryController {
                 Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
                 Vendedor vendedor = marketplaceVendedores.buscarVendedor(cedula);
                 Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a creado una cuenta", 1, "Creacion de cuenta");
+                Persistencia.guardarRecursoBinario(marketplaceVendedores);
                 return true;
             }
         }catch (CuentaException e){

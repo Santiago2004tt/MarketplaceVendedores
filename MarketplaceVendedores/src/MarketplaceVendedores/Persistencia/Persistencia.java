@@ -74,7 +74,7 @@ public class Persistencia {
     }
 
     //------------------------SERIALIZACIÓN y XML---------------------------------------------------
-    public static MarketplaceVendedores cargarRecursoBancoBinario() {
+    public static MarketplaceVendedores cargarRecursoBinario() {
 
         MarketplaceVendedores marketplaceVendedores = null;
 
@@ -87,7 +87,7 @@ public class Persistencia {
         return marketplaceVendedores;
     }
 
-    public static void guardarRecursoBancoBinario(MarketplaceVendedores marketplaceVendedores) {
+    public static void guardarRecursoBinario(MarketplaceVendedores marketplaceVendedores) {
 
         try {
             ArchivoUtil.salvarRecursoSerializado(RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_BINARIO, marketplaceVendedores);
@@ -98,7 +98,7 @@ public class Persistencia {
     }
 
 
-    public static MarketplaceVendedores cargarRecursoBancoXML() {
+    public static MarketplaceVendedores cargarRecursoXML() {
 
         MarketplaceVendedores marketplaceVendedores = null;
 
@@ -112,7 +112,7 @@ public class Persistencia {
 
     }
 
-    public static void guardarRecursoBancoXML(MarketplaceVendedores marketplaceVendedores) {
+    public static void guardarRecursoXML(MarketplaceVendedores marketplaceVendedores) {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_XML, marketplaceVendedores);

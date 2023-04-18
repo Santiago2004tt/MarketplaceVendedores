@@ -18,10 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
-public class MuroProductoAliadoController {
-
+public class MuroProductoAliadoController implements Serializable {
+    private static final long serialVersioUID = 1L;
     private Vendedor vendedorLogeado;
     private Vendedor vendedorAliado;
     private Producto producto;

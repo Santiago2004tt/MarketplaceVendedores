@@ -1,6 +1,7 @@
 package MarketplaceVendedores.controllers;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,8 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-public class CrearProductoController {
-
+public class CrearProductoController implements Serializable {
+    private static final long serialVersioUID = 1L;
     private Vendedor vendedorLogeado;
     private Image imageAux;
 

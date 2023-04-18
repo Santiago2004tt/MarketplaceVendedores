@@ -14,8 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
-public class MuroProductoLoggeadoController {
+import java.io.Serializable;
 
+public class MuroProductoLoggeadoController implements Serializable {
+    private static final long serialVersioUID = 1L;
     private Producto producto;
     private Vendedor vendedorLogeado;
 

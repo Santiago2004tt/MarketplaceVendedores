@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class MuroVendedorAliadoController {
+import java.io.Serializable;
 
+public class MuroVendedorAliadoController implements Serializable {
+    private static final long serialVersioUID = 1L;
     @FXML
     private Button btnSalir;
 

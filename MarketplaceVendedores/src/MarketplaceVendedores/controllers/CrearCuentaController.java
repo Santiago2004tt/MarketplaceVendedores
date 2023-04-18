@@ -10,7 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 
-public class CrearCuentaController {
+import java.io.Serializable;
+
+public class CrearCuentaController implements Serializable {
+    private static final long serialVersioUID = 1L;
 
     @FXML
     private TextField txtNombre;

@@ -8,8 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class LoginVendedorController {
+import java.io.Serializable;
 
+public class LoginVendedorController implements Serializable {
+    private static final long serialVersioUID = 1L;
     @FXML
     private TextField txtVendedorUser;
     @FXML
