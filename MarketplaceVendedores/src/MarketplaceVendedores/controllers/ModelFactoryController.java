@@ -61,7 +61,7 @@ public class ModelFactoryController {
     public ModelFactoryController() {
         iniciarSalvarDatosPrueba();
         cargarResourceXML();
-        cargarResourceBinario();
+
 
         if(marketplaceVendedores==null) {
             inicializarDatos();
