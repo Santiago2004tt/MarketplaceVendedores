@@ -13,6 +13,7 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_BINARIO = "C:\\td\\persistencia/Model.dat";
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_XML = "C:\\td\\persistencia/Encript.xml";
 
+    public static final String RUTA_ARCHIVO_LOG = "C:\\td\\persistencia\\log/MarketPlaceLog.txt";
 
     public static void cargarDatosArchivos(MarketplaceVendedores marketplaceVendedores) throws FileNotFoundException, IOException {
 
@@ -27,9 +28,19 @@ public class Persistencia {
         String contenido = "";
 
         for (Vendedor vendedor : listaVendedores) {
-            contenido += vendedor.getNombre() +"\n" + vendedor.getApellido() + "\n" + vendedor.getCedula() + "\n" + vendedor.getDireccion();
+            //String datosProducto = obtenerProductos(vendedor);
+            contenido += vendedor.toString() +"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_VENDEDOR, contenido, false);
+    }
+
+    private static String obtenerProductos(Vendedor vendedor) {
+        String datosProducto = "";
+
+        for (int i = 0; i < vendedor.getListaProductos().size(); i++) {
+            datosProducto += vendedor.getListaProductos().get(i).toString();
+        }
+        return datosProducto;
     }
 
 //    ----------------------LOADS------------------------
@@ -110,4 +121,10 @@ public class Persistencia {
             e.printStackTrace();
         }
     }
+    public static void guardaRegistroLog(String mensajeLog, int nivel, String accion)
+    {
+
+        ArchivoUtil.guardarRegistroLog(mensajeLog, nivel, accion, RUTA_ARCHIVO_LOG);
+    }
+
 }

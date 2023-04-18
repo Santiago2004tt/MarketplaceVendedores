@@ -53,9 +53,11 @@ public class ArchivoUtil {
 
         try {
 
+            System.out.println("hola");
             fileHandler = new FileHandler(rutaArchivo,true);
             fileHandler.setFormatter(new SimpleFormatter());
             LOGGER.addHandler(fileHandler);
+            System.out.println("entro");
 
             switch (nivel) {
                 case 1:

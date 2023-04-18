@@ -85,4 +85,12 @@ public class Cuenta implements Serializable {
     public int hashCode() {
         return Objects.hash(usuario, contrasenia);
     }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "usuario='" + usuario  +
+                ", contrasenia='" + contrasenia  +
+                '}';
+    }
 }

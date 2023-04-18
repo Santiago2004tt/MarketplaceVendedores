@@ -41,10 +41,15 @@ public class ModelFactoryController {
             if(marketplaceVendedores.crearProducto(nombre,codigo,categoria,precioDefinitivo,estado,image,fecha)){
                 Producto producto = marketplaceVendedores.buscarProducto(codigo);
                 vendedorLogeado.getListaProductos().add(producto);
+                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
+                Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" a creado una publicacion", 1, "Creacion Publicacion");
                 return true;
             }
         } catch (ProductoExceptions e) {
+            Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" no se a creado la publicacion", 3, "Creacion Publicacion");
             mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return false;
     }
@@ -60,7 +65,7 @@ public class ModelFactoryController {
 
     public ModelFactoryController() {
         iniciarSalvarDatosPrueba();
-        cargarResourceXML();
+        //cargarResourceXML();
 
 
         if(marketplaceVendedores==null) {
@@ -68,25 +73,41 @@ public class ModelFactoryController {
             guardarResourceXML();
             guardarResourceBinario();
         }
+
     }
 
     private void inicializarDatos() {
 
-        marketplaceVendedores = new MarketplaceVendedores("Hola");
+        marketplaceVendedores = new MarketplaceVendedores("sandbox");
+        //imagen
+        Image image = new Image("iconPapa.jpg");
+        //creando las instancias
         Muro muro = new Muro();
         Producto producto = new Producto();
         Comentario comentario = new Comentario();
         Vendedor vendedor = new Vendedor();
+        Cuenta cuenta = new Cuenta("jere", "1");
+        //crear comentario
         comentario.setMensaje("alguien: hola");
-        Cuenta cuenta = new Cuenta("juan", "123");
-        producto.setNombre("papas");
+        //obtener mensaje
         muro.getListaComentarios().add(comentario);
+        //crear producto
+        producto.setNombre("papas");
+        producto.setEstado(Estado.PUBLICADO);
+        producto.setDate("2023-04-14");
+        producto.setCategoria("Verduras");
+        producto.setCodigo("1");
+        producto.setImage(image);
         producto.setMuro(muro);
+        //aniadir datos al vendedor
         vendedor.setCuenta(cuenta);
-        vendedor.setNombre("jere");
+        vendedor.setNombre("Jeremias");
+        vendedor.setApellido("Gamer");
         vendedor.setCedula("1");
+        vendedor.setDireccion("Armenia-Quindio");
         vendedor.getListaProductos().add(producto);
 
+        //aniadir datos al marketplace
         marketplaceVendedores.getListaCuentas().add(cuenta);
         marketplaceVendedores.getListaVendedores().add(vendedor);
 
@@ -99,38 +120,38 @@ public class ModelFactoryController {
     private void iniciarSalvarDatosPrueba() {
         inicializarDatos();
         try {
-            Persistencia.guardarVendedores(getMarketplaceVendedores().getListaVendedores());
+            Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
 
-            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    private void cargarDatosDesdeArchivos() {
-        marketplaceVendedores = new MarketplaceVendedores();
-        try {
-            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
+            //Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+//    private void cargarDatosDesdeArchivos() {
+//        marketplaceVendedores = new MarketplaceVendedores();
+//        try {
+//            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
+//
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void cargarResourceBinario() {
-
-        marketplaceVendedores = Persistencia.cargarRecursoBancoBinario();
-    }
+//    public void cargarResourceBinario() {
+//
+//        marketplaceVendedores = Persistencia.cargarRecursoBancoBinario();
+//    }
     public void guardarResourceBinario() {
 
         Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
     }
-    public void cargarResourceXML() {
-
-        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
-    }
+//    public void cargarResourceXML() {
+//
+//        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
+//    }
     public void guardarResourceXML() {
 
         Persistencia.guardarRecursoBancoXML(marketplaceVendedores);
@@ -142,8 +163,11 @@ public class ModelFactoryController {
             if(getInstance().marketplaceVendedores.verificarCuenta(usuario, contrasenia)){
                 Vendedor vendedor = getInstance().marketplaceVendedores.buscarVendedorCuenta(usuario, contrasenia);
                 getInstance().accederCuenta(vendedor);
+                Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a iniciado sesion", 1, "Inicio Sesion");
             }else{
                 mostrarMensaje("Notificacion vendedor", "cuenta no existe", "La cuenta no ha sido encontrada", Alert.AlertType.ERROR);
+                Persistencia.guardaRegistroLog("No a iniciado sesion", 2, "Inicio Sesion Fallida");
+
             }
         }catch (VendedorException e){
             mostrarMensaje("Notificacion vendedor", "Error", "Error", Alert.AlertType.ERROR);
@@ -166,23 +190,22 @@ public class ModelFactoryController {
             marketplaceVendedores.crearCuenta(usuario, contrasenia);
             Cuenta cuenta =marketplaceVendedores.buscarCuenta(usuario, contrasenia);
             if(marketplaceVendedores.crearVendedor(nombre, apellido, cedula, direccion, cuenta)){
+                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
+                Vendedor vendedor = marketplaceVendedores.buscarVendedor(cedula);
+                Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a creado una cuenta", 1, "Creacion de cuenta");
                 return true;
             }
-
         }catch (CuentaException e){
+            Persistencia.guardaRegistroLog("Error al crear una cuenta", 2, "Crear Cuenta");
             mostrarMensaje("Notificacion vendedor", "Cuenta ya existe", "La cuenta ya ha sido creada", Alert.AlertType.ERROR);
         }catch (VendedorException e){
+            Persistencia.guardaRegistroLog("Error al crear una cuenta", 2, "Crear Cuenta");
             marketplaceVendedores.eliminarCuenta(usuario, contrasenia);
             mostrarMensaje("Notificacion vendedor", "Vendedor ya existe", "El vendedor ya ha sido creado", Alert.AlertType.ERROR);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return false;
-    }
-
-    public MarketplaceVendedores getMarketplaceVendedores(){
-        return marketplaceVendedores;
-    }
-    public void setMarketplaceVendedores(MarketplaceVendedores marketplaceVendedores){
-        this.marketplaceVendedores = marketplaceVendedores;
     }
 
     public void accederCuenta(Vendedor vendedor) {
