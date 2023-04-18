@@ -1,4 +1,6 @@
 package MarketplaceVendedores.Persistencia;
+import javafx.scene.image.Image;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedReader;
@@ -187,4 +189,7 @@ public class ArchivoUtil {
         codificadorXML.close();
 
     }
+
+    //-------------------------------mio ---------------
+
 }

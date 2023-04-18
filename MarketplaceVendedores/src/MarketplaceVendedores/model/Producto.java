@@ -176,4 +176,17 @@ public class Producto implements Serializable {
     public int hashCode() {
         return Objects.hash(codigo);
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", precio=" + precio +
+                ", estado=" + estado +
+                ", image=" + image +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

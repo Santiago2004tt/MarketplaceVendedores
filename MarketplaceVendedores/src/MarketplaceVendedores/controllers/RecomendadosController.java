@@ -8,8 +8,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class RecomendadosController {
+import java.io.Serializable;
 
+public class RecomendadosController implements Serializable {
+    private static final long serialVersioUID = 1L;
     private Vendedor vendedorLogeado;
 
     @FXML

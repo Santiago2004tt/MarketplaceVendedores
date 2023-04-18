@@ -13,6 +13,7 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_BINARIO = "C:\\td\\persistencia/Model.dat";
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_XML = "C:\\td\\persistencia/Encript.xml";
 
+    public static final String RUTA_ARCHIVO_LOG = "C:\\td\\persistencia\\log/MarketPlaceLog.txt";
 
     public static void cargarDatosArchivos(MarketplaceVendedores marketplaceVendedores) throws FileNotFoundException, IOException {
 
@@ -27,9 +28,19 @@ public class Persistencia {
         String contenido = "";
 
         for (Vendedor vendedor : listaVendedores) {
-            contenido += vendedor.getNombre() +"\n" + vendedor.getApellido() + "\n" + vendedor.getCedula() + "\n" + vendedor.getDireccion();
+            //String datosProducto = obtenerProductos(vendedor);
+            contenido += vendedor.toString() +"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_VENDEDOR, contenido, false);
+    }
+
+    private static String obtenerProductos(Vendedor vendedor) {
+        String datosProducto = "";
+
+        for (int i = 0; i < vendedor.getListaProductos().size(); i++) {
+            datosProducto += vendedor.getListaProductos().get(i).toString();
+        }
+        return datosProducto;
     }
 
 //    ----------------------LOADS------------------------
@@ -63,7 +74,7 @@ public class Persistencia {
     }
 
     //------------------------SERIALIZACIÓN y XML---------------------------------------------------
-    public static MarketplaceVendedores cargarRecursoBancoBinario() {
+    public static MarketplaceVendedores cargarRecursoBinario() {
 
         MarketplaceVendedores marketplaceVendedores = null;
 
@@ -76,7 +87,7 @@ public class Persistencia {
         return marketplaceVendedores;
     }
 
-    public static void guardarRecursoBancoBinario(MarketplaceVendedores marketplaceVendedores) {
+    public static void guardarRecursoBinario(MarketplaceVendedores marketplaceVendedores) {
 
         try {
             ArchivoUtil.salvarRecursoSerializado(RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_BINARIO, marketplaceVendedores);
@@ -87,7 +98,7 @@ public class Persistencia {
     }
 
 
-    public static MarketplaceVendedores cargarRecursoBancoXML() {
+    public static MarketplaceVendedores cargarRecursoXML() {
 
         MarketplaceVendedores marketplaceVendedores = null;
 
@@ -101,7 +112,7 @@ public class Persistencia {
 
     }
 
-    public static void guardarRecursoBancoXML(MarketplaceVendedores marketplaceVendedores) {
+    public static void guardarRecursoXML(MarketplaceVendedores marketplaceVendedores) {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_XML, marketplaceVendedores);
@@ -110,4 +121,10 @@ public class Persistencia {
             e.printStackTrace();
         }
     }
+    public static void guardaRegistroLog(String mensajeLog, int nivel, String accion)
+    {
+
+        ArchivoUtil.guardarRegistroLog(mensajeLog, nivel, accion, RUTA_ARCHIVO_LOG);
+    }
+
 }

@@ -14,8 +14,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MuroVendedorPrincipalController {
+import java.io.Serializable;
 
+public class MuroVendedorPrincipalController implements Serializable {
+    private static final long serialVersioUID = 1L;
     private Main main;
 
     Vendedor vendedorLoggeado;

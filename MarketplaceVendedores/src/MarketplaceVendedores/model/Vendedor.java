@@ -1,6 +1,7 @@
 package MarketplaceVendedores.model;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -195,7 +196,22 @@ public class Vendedor implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Vendedor{" +
+                ", nombre='" + nombre +
+                ", apellido='" + apellido +
+                ", cedula='" + cedula +
+                ", direccion='" + direccion +
+                ", cuenta=" + cuenta.toString() +
+                ", listaProductos=" + listaProductos.toString() +
+                "listaVendedoresAliados=" + Arrays.toString(listaVendedoresAliados) +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(cedula);
     }
 }
+
+
