@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.Serializable;
@@ -62,8 +63,9 @@ public class MuroProductoLoggeadoController implements Serializable {
 
     public void aniadirProducto(Producto producto, Vendedor vendedorLogeado){
         this.producto = producto;
+        Image image = new Image(producto.getImage());
         this.vendedorLogeado = vendedorLogeado;
-        imgViewProductoLoggeado.setImage(producto.getImage());
+        imgViewProductoLoggeado.setImage(image);
         labelNombreProducto.setText("Nombre: "+producto.getNombre());
         labelCategoriaProducto.setText("Categoria: "+producto.getCategoria());
         labelPrecioProducto.setText("Precio: "+(String.valueOf(producto.getPrecio())));

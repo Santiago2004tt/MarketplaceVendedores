@@ -99,7 +99,9 @@ public class CrearProductoController implements Serializable {
         }
         if(fecha.equals("")){
             return false;
-
+        }
+        if(this.imageAux == null){
+            return false;
         }
         return true;
 

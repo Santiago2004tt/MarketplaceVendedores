@@ -238,7 +238,7 @@ public class MarketplaceVendedores implements Serializable {
         producto.setPrecio(precio);
         producto.setEstado(estado);
         producto.setDate(date);
-        producto.setImage(image);
+        producto.setImage(image.getUrl());
 
         if(existeProducto(codigo)){
             throw new ProductoExceptions("producto Hecho");
@@ -284,7 +284,7 @@ public class MarketplaceVendedores implements Serializable {
             producto.setCategoria(categoria);
             producto.setPrecio(precio);
             producto.setEstado(estado);
-            producto.setImage(image);
+            producto.setImage(image.getUrl());
             producto.setDate(date);
             return true;
         }

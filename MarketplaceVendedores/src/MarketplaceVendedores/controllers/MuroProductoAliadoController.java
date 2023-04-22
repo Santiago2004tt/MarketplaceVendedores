@@ -15,10 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.Locale;
 
 
 public class MuroProductoAliadoController implements Serializable {
@@ -94,9 +96,10 @@ public class MuroProductoAliadoController implements Serializable {
 
     public void aniadirProducto(Producto producto, Vendedor vendedorLogeado, Vendedor vendedorAliado){
         this.producto = producto;
+        Image image = new Image(producto.getImage());
         this.vendedorLogeado = vendedorLogeado;
         this.vendedorAliado = vendedorAliado;
-        imgProducto.setImage(producto.getImage());
+        imgProducto.setImage(image);
         txtNombre.setText(producto.getNombre());
         txtCategoria.setText(producto.getCategoria());
         txtPrecio.setText(String.valueOf(producto.getPrecio()));

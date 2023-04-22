@@ -65,11 +65,10 @@ public class ModelFactoryController {
     }
 
     public ModelFactoryController() {
-        iniciarSalvarDatosPrueba();
+        this.marketplaceVendedores=Persistencia.cargarRecursoBinario();
         if(marketplaceVendedores==null) {
             inicializarDatos();
-            Persistencia.guardarRecursoXML(marketplaceVendedores);
-            Persistencia.guardarRecursoBinario(marketplaceVendedores);
+            iniciarSalvarDatosPrueba();
         }
 
     }
@@ -95,7 +94,7 @@ public class ModelFactoryController {
         producto.setDate("2023-04-14");
         producto.setCategoria("Verduras");
         producto.setCodigo("1");
-        //producto.setImage(image);
+        producto.setImage(image.getUrl());
         producto.setMuro(muro);
         //aniadir datos al vendedor
         vendedor.setCuenta(cuenta);
@@ -115,13 +114,11 @@ public class ModelFactoryController {
     //-------------------------------------Serializable y XML------------------------------------------
 
     private void iniciarSalvarDatosPrueba() {
-        this.marketplaceVendedores=Persistencia.cargarRecursoBinario();
-
 
         try {
             Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-
-            //Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
+            Persistencia.guardarRecursoXML(marketplaceVendedores);
+            Persistencia.guardarRecursoBinario(marketplaceVendedores);
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -193,6 +190,7 @@ public class ModelFactoryController {
                 Vendedor vendedor = marketplaceVendedores.buscarVendedor(cedula);
                 Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a creado una cuenta", 1, "Creacion de cuenta");
                 Persistencia.guardarRecursoBinario(marketplaceVendedores);
+                Persistencia.guardarRecursoXML(marketplaceVendedores);
                 return true;
             }
         }catch (CuentaException e){

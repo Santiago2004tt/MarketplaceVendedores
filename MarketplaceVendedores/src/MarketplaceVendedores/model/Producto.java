@@ -22,7 +22,7 @@ public class Producto implements Serializable {
     private String categoria;
     private double precio;
     private Estado estado;
-    private Image image;
+    private String image;
     private String date;
     private Muro muro;
 
@@ -31,7 +31,7 @@ public class Producto implements Serializable {
      * -----------
      * Builder
      */
-    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, Image image, String date, Muro muro) {
+    public Producto(String nombre, String codigo, String categoria, double precio, Estado estado, String image, String date, Muro muro) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.categoria = categoria;
@@ -128,11 +128,11 @@ public class Producto implements Serializable {
      *
      * @return
      */
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
