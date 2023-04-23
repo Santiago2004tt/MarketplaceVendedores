@@ -145,9 +145,9 @@ public class ModelFactoryController {
 //        Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
 //    }
 //    public void cargarResourceXML() {
-//
-//        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
-//    }
+////
+////        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
+////    }
 //    public void guardarResourceXML() {
 //
 //        Persistencia.guardarRecursoXML(marketplaceVendedores);
