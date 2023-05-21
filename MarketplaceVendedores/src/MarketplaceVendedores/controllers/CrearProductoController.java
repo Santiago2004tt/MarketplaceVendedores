@@ -101,6 +101,7 @@ public class CrearProductoController implements Serializable {
             return false;
         }
         if(this.imageAux == null){
+            System.out.println("el error esta aqui");
             return false;
         }
         return true;

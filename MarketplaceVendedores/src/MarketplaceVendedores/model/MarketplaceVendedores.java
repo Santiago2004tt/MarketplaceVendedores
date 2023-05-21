@@ -453,4 +453,55 @@ public class MarketplaceVendedores implements Serializable {
         }
         return vendedorAux;
     }
+
+    public ArrayList<Vendedor> obtenerListaVendedoresRecomendados(Vendedor vendedor) {
+        ArrayList<Vendedor> listaVendedoresNueva = new ArrayList<>();
+        for (Vendedor vendedorAux: listaVendedores) {
+            if(verificarVendedorRepetido(vendedor, vendedorAux) && !vendedor.getCedula().equals(vendedorAux.getCedula())){
+                listaVendedoresNueva.add(vendedorAux);
+            }
+        }
+        return listaVendedoresNueva;
+    }
+
+    private boolean verificarVendedorRepetido(Vendedor vendedor, Vendedor vendedorAux) {
+
+        for (Vendedor vendedor1: vendedor.getListaVendedoresAliados()) {
+            if(vendedor1.getCedula().equals(vendedorAux.getCedula())){
+                return false;
+            }
+        }
+
+        for (Vendedor vendedor1: vendedor.getListaSolicitudes()) {
+            if(vendedor1.getCedula().equals(vendedorAux.getCedula())){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        System.out.println(vendedorSeleccionado.getNombre());
+        System.out.println(vendedorLogeado.getNombre());
+        if(verificarVendedor(vendedorLogeado, vendedorSeleccionado) == true){  //verifica si el vendedor tiene una solicitud
+            System.out.println("entro");
+            vendedorSeleccionado.getListaSolicitudes().add(vendedorLogeado);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean verificarVendedor(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        System.out.println("entra");
+        for (Vendedor vendedorAux: vendedorSeleccionado.getListaSolicitudes()) {
+            System.out.println(vendedorAux.getCedula());
+            System.out.println(vendedorLogeado.getCedula());
+            if(vendedorAux.getCedula().equals(vendedorLogeado)){
+                System.out.println("entro al if");
+                return false;
+            }
+        }
+        return true;
+    }
 }

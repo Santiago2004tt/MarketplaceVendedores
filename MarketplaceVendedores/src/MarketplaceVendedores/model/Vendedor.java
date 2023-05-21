@@ -18,7 +18,7 @@ public class Vendedor implements Serializable {
      */
 
     private static final long serialVersioUID = 1L;
-    private Vendedor[] listaVendedoresAliados;
+    private ArrayList<Vendedor> listaVendedoresAliados;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaSolicitudes;
     private ArrayList<Vendedor> listaRecomendados;
@@ -44,7 +44,7 @@ public class Vendedor implements Serializable {
         this.cedula = cedula;
         this.direccion = direccion;
         this.cuenta = cuenta;
-        listaVendedoresAliados  = new Vendedor[10];
+        listaVendedoresAliados  = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
@@ -56,7 +56,7 @@ public class Vendedor implements Serializable {
      * Void builder
      */
     public Vendedor() {
-        listaVendedoresAliados = new Vendedor[10];
+        listaVendedoresAliados = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
@@ -68,11 +68,11 @@ public class Vendedor implements Serializable {
      * Setter and Getter the list seller allies
      * @return
      */
-    public Vendedor[] getListaVendedoresAliados() {
+    public ArrayList<Vendedor> getListaVendedoresAliados() {
         return listaVendedoresAliados;
     }
 
-    public void setListaVendedoresAliados(Vendedor[] listaVendedoresAliados) {
+    public void setListaVendedoresAliados(ArrayList<Vendedor> listaVendedoresAliados) {
         this.listaVendedoresAliados = listaVendedoresAliados;
     }
 
@@ -203,8 +203,7 @@ public class Vendedor implements Serializable {
                 ", cedula='" + cedula +
                 ", direccion='" + direccion +
                 ", cuenta=" + cuenta.toString() +
-                ", listaProductos=" + listaProductos.toString() +
-                "listaVendedoresAliados=" + Arrays.toString(listaVendedoresAliados) +
+                ", listaProductos=" + listaProductos.toString()  +
                 '}';
     }
 

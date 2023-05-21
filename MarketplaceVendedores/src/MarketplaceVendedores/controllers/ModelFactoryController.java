@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ModelFactoryController {
 
@@ -22,6 +23,10 @@ public class ModelFactoryController {
 
     public void visitarCrearProducto(Vendedor vendedorLogeado) {
         main.mostrarCrearProducto(vendedorLogeado);
+    }
+
+    public ArrayList<Vendedor> obtenerVendedores(Vendedor vendedor) {
+        return marketplaceVendedores.obtenerListaVendedoresRecomendados(vendedor);
     }
 
     /**
@@ -65,6 +70,7 @@ public class ModelFactoryController {
         Comentario comentario = new Comentario();
         Vendedor vendedor = new Vendedor();
         Cuenta cuenta = new Cuenta("jere", "1");
+        Cuenta cuenta1 = new Cuenta("juan", "2");
         //crear comentario
         comentario.setMensaje("alguien: hola");
         //obtener mensaje
@@ -84,10 +90,20 @@ public class ModelFactoryController {
         vendedor.setCedula("1");
         vendedor.setDireccion("Armenia-Quindio");
         vendedor.getListaProductos().add(producto);
-
+        //vendedor aliado
+        Vendedor vendedor1 = new Vendedor();
+        vendedor1.setCuenta(cuenta1);
+        vendedor1.setNombre("Juan");
+        vendedor1.setApellido("Gamer");
+        vendedor1.setCedula("1");
+        vendedor1.setDireccion("Armenia-Quindio");
+        vendedor.getListaVendedoresAliados().add(vendedor1);
+        vendedor1.getListaVendedoresAliados().add(vendedor);
         //aniadir datos al marketplace
         marketplaceVendedores.getListaCuentas().add(cuenta);
+        marketplaceVendedores.getListaCuentas().add(cuenta1);
         marketplaceVendedores.getListaVendedores().add(vendedor);
+        marketplaceVendedores.getListaVendedores().add(vendedor1);
         System.out.println("la empresa: "+marketplaceVendedores.getNombre() +" ya se a inicializado");
 
     }
@@ -139,8 +155,7 @@ public class ModelFactoryController {
                 Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
                 Vendedor vendedor = marketplaceVendedores.buscarVendedor(cedula);
                 Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a creado una cuenta", 1, "Creacion de cuenta");
-                Persistencia.guardarRecursoBinario(marketplaceVendedores);
-                Persistencia.guardarRecursoXML(marketplaceVendedores);
+                iniciarSalvarDatosPrueba();
                 return true;
             }
         }catch (CuentaException e){
@@ -163,18 +178,26 @@ public class ModelFactoryController {
             if(marketplaceVendedores.crearProducto(nombre,codigo,categoria,precioDefinitivo,estado,image,fecha)){
                 Producto producto = marketplaceVendedores.buscarProducto(codigo);
                 vendedorLogeado.getListaProductos().add(producto);
-                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
                 Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" a creado una publicacion", 1, "Creacion Publicacion");
-                Persistencia.guardarRecursoBinario(marketplaceVendedores);
+                iniciarSalvarDatosPrueba();
                 return true;
             }
         } catch (ProductoExceptions e) {
             Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" no se a creado la publicacion", 3, "Creacion Publicacion");
             mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return false;
+    }
+
+    public void enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+        if(marketplaceVendedores.enviarSolicitud(vendedorLogeado, vendedorSeleccionado)){
+            mostrarMensaje("Notificacion vendedor", "se a enviado la solicitud", "la solicitud fue enviada exitosamente", Alert.AlertType.INFORMATION);
+            Persistencia.guardaRegistroLog("se a enviado la solicitud", 2, "Enviar solicitud");
+            iniciarSalvarDatosPrueba();
+        }else {
+            mostrarMensaje("Notificacion vendedor", "Solicitud ya enviada", "no se puede volver a enviar la solicitud", Alert.AlertType.ERROR);
+            Persistencia.guardaRegistroLog("Error al enviar la solicitud", 2, "Enviar solicitud");
+        }
     }
 
     //----------------------------Metodos de cambio de ventana-----------------------
