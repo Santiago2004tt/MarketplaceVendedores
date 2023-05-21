@@ -20,7 +20,7 @@ public class Muro implements Serializable {
 
     private ArrayList<Mensaje> listaMensajes;
 
-    private ArrayList<MeGusta> listaMeGusta;
+    private ArrayList<Vendedor> listaMeGusta;
 
     /**
      * Constructor
@@ -67,11 +67,11 @@ public class Muro implements Serializable {
      * getter and Setter the list i like
      * @return
      */
-    public ArrayList<MeGusta> getListaMeGusta() {
+    public ArrayList<Vendedor> getListaMeGusta() {
         return listaMeGusta;
     }
 
-    public void setListaMeGusta(ArrayList<MeGusta> listaMeGusta) {
+    public void setListaMeGusta(ArrayList<Vendedor> listaMeGusta) {
         this.listaMeGusta = listaMeGusta;
     }
 }

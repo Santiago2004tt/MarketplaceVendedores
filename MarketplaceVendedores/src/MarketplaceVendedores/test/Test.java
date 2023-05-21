@@ -2,6 +2,9 @@ package MarketplaceVendedores.test;
 
 import MarketplaceVendedores.controllers.ModelFactoryController;
 import MarketplaceVendedores.model.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
+
 import java.io.IOException;
 
 import static MarketplaceVendedores.Persistencia.Persistencia.*;
@@ -44,5 +47,7 @@ public class Test {
         //return MarketplaceVendedores.verificarExisteMeGusta(vendedorLogeado, vendedorAliado);
         return false;
     }
+
+
 
 }

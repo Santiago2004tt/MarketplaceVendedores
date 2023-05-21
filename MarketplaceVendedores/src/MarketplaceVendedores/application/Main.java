@@ -81,7 +81,7 @@ public class Main extends Application {
         }
     }
 
-    public void mostrarVendedoresAliados(Vendedor vendedorLogeado) {
+    public void mostrarVendedoresAliadosRecomendado(Vendedor vendedorLogeado) {
         try {
             stage.close();
             stage = new Stage();
@@ -137,4 +137,43 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    public void mostrarVendedorAliado(Vendedor vendedorLogeado, Vendedor vendedorVisitane) {
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/MuroVendedorAliado.fxml"));
+            AnchorPane rootLayout = loader.load();
+            MuroVendedorAliadoController controller = loader.getController();
+            controller.inicializarVendedor(vendedorLogeado, vendedorVisitane);
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mostrarProductoAliado(Vendedor vendedorLogeado, Vendedor vendedorVisitane, Producto producto) {
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/MuroProductoAliado.fxml"));
+            AnchorPane rootLayout = loader.load();
+            MuroProductoAliadoController controller = loader.getController();
+            controller.inicializarVendedor(vendedorLogeado, vendedorVisitane, producto);
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

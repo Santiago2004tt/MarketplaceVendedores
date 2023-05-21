@@ -26,7 +26,7 @@
             </Label>
             <Button fx:id="btnRegresar" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#regresar" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="Regresar" />
             <Button fx:id="btnMeGusta" layoutX="194.0" layoutY="362.0" mnemonicParsing="false" onAction="#darMeGusta" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="me gusta" />
-            <Button fx:id="btnPublicarComentario" layoutX="409.0" layoutY="362.0" mnemonicParsing="false" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="Publicar comentario" />
+            <Button fx:id="btnPublicarComentario" layoutX="409.0" layoutY="362.0" mnemonicParsing="false" onAction="#publicarComentario" style="-fx-background-color: #5905F6; -fx-text-fill: white;" text="Publicar comentario" />
             <Label fx:id="txtMeGusta" layoutX="278.0" layoutY="360.0" text="Numero" textFill="#eeeeee">
                <font>
                   <Font size="19.0" />

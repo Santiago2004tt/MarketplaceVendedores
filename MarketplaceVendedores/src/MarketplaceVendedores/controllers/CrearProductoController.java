@@ -99,7 +99,10 @@ public class CrearProductoController implements Serializable {
         }
         if(fecha.equals("")){
             return false;
-
+        }
+        if(this.imageAux == null){
+            System.out.println("el error esta aqui");
+            return false;
         }
         return true;
 

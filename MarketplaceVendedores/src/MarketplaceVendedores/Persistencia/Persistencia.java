@@ -12,7 +12,6 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_VENDEDOR = "C:\\td\\persistencia\\Archivos/archivoVendedores.txt";
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_BINARIO = "C:\\td\\persistencia/Model.dat";
     public static final String RUTA_ARCHIVO_MODELO_MARKETPLACEVENDEDORES_XML = "C:\\td\\persistencia/Encript.xml";
-
     public static final String RUTA_ARCHIVO_LOG = "C:\\td\\persistencia\\log/MarketPlaceLog.txt";
 
     public static void cargarDatosArchivos(MarketplaceVendedores marketplaceVendedores) throws FileNotFoundException, IOException {

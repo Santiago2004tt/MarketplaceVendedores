@@ -100,7 +100,7 @@ public class MuroVendedorPrincipalController implements Serializable {
         if(productosVendedor != null){
             ModelFactoryController.getInstance().visitarMuroProducto(productosVendedor, vendedorLoggeado);
         }else{
-            mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificacion vendedor", "Vendedor no seleccionado", "El vendedor no ha sido seleccionado", Alert.AlertType.ERROR);
         }
     }
 
