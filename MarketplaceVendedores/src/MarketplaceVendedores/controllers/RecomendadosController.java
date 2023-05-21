@@ -1,18 +1,19 @@
 package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.model.Vendedor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.Serializable;
 
 public class RecomendadosController implements Serializable {
     private static final long serialVersioUID = 1L;
     private Vendedor vendedorLogeado;
+    ObservableList<Vendedor> listaVendedorData= FXCollections.observableArrayList();
+    Vendedor vendedorSeleccionado = null;
 
     @FXML
     private Tab tabRecomendados;
@@ -101,6 +102,19 @@ public class RecomendadosController implements Serializable {
     private void volverEvent(){
         ModelFactoryController.getInstance().accederCuenta(vendedorLogeado);
     }
+
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../stylesheets/AlertsStylesheets.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog");
+        alert.showAndWait();
+    }
+
     public void inicializarVendedor(Vendedor vendedorLogeado) {
         this.vendedorLogeado = vendedorLogeado;
     }

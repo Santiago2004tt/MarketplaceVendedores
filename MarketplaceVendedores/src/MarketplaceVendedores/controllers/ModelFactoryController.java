@@ -20,50 +20,28 @@ public class ModelFactoryController {
     MarketplaceVendedores marketplaceVendedores;
     Main main;
 
-    public void aniadirMain(Main main) {
-        this.main = main;
-    }
-
-    public void visitarVendedoresAction(Vendedor vendedorLoggeado) {
-        main.mostrarVendedoresAliados(vendedorLoggeado);
-    }
-
-    public void visitarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
-        main.mostrarMuroProductoLogeado(productosVendedor, vendedorLoggeado);
-    }
-
     public void visitarCrearProducto(Vendedor vendedorLogeado) {
         main.mostrarCrearProducto(vendedorLogeado);
     }
 
-    public boolean crearProducto(String nombre, String codigo, String categoria, double precioDefinitivo, Estado estado, String fecha, Image image, Vendedor vendedorLogeado) {
-        try {
-            if(marketplaceVendedores.crearProducto(nombre,codigo,categoria,precioDefinitivo,estado,image,fecha)){
-                Producto producto = marketplaceVendedores.buscarProducto(codigo);
-                vendedorLogeado.getListaProductos().add(producto);
-                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-                Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" a creado una publicacion", 1, "Creacion Publicacion");
-                Persistencia.guardarRecursoBinario(marketplaceVendedores);
-                return true;
-            }
-        } catch (ProductoExceptions e) {
-            Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" no se a creado la publicacion", 3, "Creacion Publicacion");
-            mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
-
+    /**
+     * singleton holder
+     */
     public static class SingletonHolder {
         public final static ModelFactoryController eINSTANCE = new ModelFactoryController();
     }
 
+    /**
+     * get del singleton
+     * @return
+     */
     public static ModelFactoryController getInstance() {
         return SingletonHolder.eINSTANCE;
     }
 
+    /**
+     * constructor de model factory controller
+     */
     public ModelFactoryController() {
         this.marketplaceVendedores=Persistencia.cargarRecursoBinario();
         if(marketplaceVendedores==null) {
@@ -73,6 +51,9 @@ public class ModelFactoryController {
 
     }
 
+    /**
+     * metodo para inicializar datos
+     */
     private void inicializarDatos() {
 
         marketplaceVendedores = new MarketplaceVendedores("sandbox");
@@ -111,8 +92,11 @@ public class ModelFactoryController {
 
     }
 
-    //-------------------------------------Serializable y XML------------------------------------------
+    //-------------------------------------------------------------------------------
 
+    /**
+     * metodo para guardar los datos
+     */
     private void iniciarSalvarDatosPrueba() {
 
         try {
@@ -125,34 +109,8 @@ public class ModelFactoryController {
             e.printStackTrace();
         }
     }
-//    private void cargarDatosDesdeArchivos() {
-//        marketplaceVendedores = new MarketplaceVendedores();
-//        try {
-//            Persistencia.cargarDatosArchivos(getMarketplaceVendedores());
-//
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
 
-//    public void cargarResourceBinario() {
-//
-//        marketplaceVendedores = Persistencia.cargarRecursoBancoBinario();
-//    }
-//    public void guardarResourceBinario() {
-//
-//        Persistencia.guardarRecursoBancoBinario(marketplaceVendedores);
-//    }
-//    public void cargarResourceXML() {
-////
-////        marketplaceVendedores = Persistencia.cargarRecursoBancoXML();
-////    }
-//    public void guardarResourceXML() {
-//
-//        Persistencia.guardarRecursoXML(marketplaceVendedores);
-//    }
-    //--------------------------------------------------------------------------------------------------
+    //---------------------------------------Metodo de iniciar sesion -------------------------------------
 
     public void iniciarSesion(String usuario, String contrasenia){
         try {
@@ -170,16 +128,8 @@ public class ModelFactoryController {
 
         }
     }
-    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
 
-        Alert alert = new Alert(alertType);
-        alert.setTitle(titulo);
-        alert.setHeaderText(header);
-        alert.setContentText(contenido);
-        DialogPane dialogPane = alert.getDialogPane();
-        alert.showAndWait();
-    }
-
+    //-------------------------------------Metodos de vendedores-------------------
     public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, String usuario, String  contrasenia) throws CuentaException, VendedorException {
 
         try {
@@ -206,6 +156,32 @@ public class ModelFactoryController {
         return false;
     }
 
+
+    //---------------------------Metodos de producto----------------------------
+    public boolean crearProducto(String nombre, String codigo, String categoria, double precioDefinitivo, Estado estado, String fecha, Image image, Vendedor vendedorLogeado) {
+        try {
+            if(marketplaceVendedores.crearProducto(nombre,codigo,categoria,precioDefinitivo,estado,image,fecha)){
+                Producto producto = marketplaceVendedores.buscarProducto(codigo);
+                vendedorLogeado.getListaProductos().add(producto);
+                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
+                Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" a creado una publicacion", 1, "Creacion Publicacion");
+                Persistencia.guardarRecursoBinario(marketplaceVendedores);
+                return true;
+            }
+        } catch (ProductoExceptions e) {
+            Persistencia.guardaRegistroLog(vendedorLogeado.getNombre()+" "+vendedorLogeado.getApellido()+" no se a creado la publicacion", 3, "Creacion Publicacion");
+            mostrarMensaje("Notificacion vendedor", "rellenar los datos", "datos incompletos, por favor rellenar", Alert.AlertType.ERROR);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    //----------------------------Metodos de cambio de ventana-----------------------
+
+    public void aniadirMain(Main main) {
+        this.main = main;
+    }
     public void accederCuenta(Vendedor vendedor) {
         main.mostrarMainVendedor(vendedor);
     }
@@ -216,5 +192,22 @@ public class ModelFactoryController {
 
     public void volverInicioSesion() {
         main.MostrarLoginVendedor();
+    }
+    public void visitarVendedoresAction(Vendedor vendedorLoggeado) {
+        main.mostrarVendedoresAliados(vendedorLoggeado);
+    }
+    public void visitarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
+        main.mostrarMuroProductoLogeado(productosVendedor, vendedorLoggeado);
+    }
+
+    //-------------------------Metodos auxiliares----------------------------------------
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        DialogPane dialogPane = alert.getDialogPane();
+        alert.showAndWait();
     }
 }
