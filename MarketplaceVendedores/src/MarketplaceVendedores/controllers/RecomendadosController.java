@@ -1,6 +1,7 @@
 package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.model.Vendedor;
+import com.sun.webkit.Timer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,7 +78,15 @@ public class RecomendadosController implements Serializable {
 
     @FXML
     void visitarAction(ActionEvent event) {
+        visitarVendedor();
+    }
 
+    private void visitarVendedor() {
+        if(vendedorAliado != null){
+            ModelFactoryController.getInstance().visitarVendedorAliado(vendedorLogeado, vendedorAliado);
+        }else {
+            mostrarMensaje("Notificacion vendedor", "Vendedor no seleccionado", "El vendedor No ha sido seleccionado", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -87,12 +96,38 @@ public class RecomendadosController implements Serializable {
 
     @FXML
     void aceptarSolicitudAction(ActionEvent event) {
+        aceptarSolicitudEvent();
+    }
 
+    private void aceptarSolicitudEvent() {
+        if(vendedorSolicitud != null){
+            ModelFactoryController.getInstance().aceptarSolicitud(vendedorLogeado, vendedorSolicitud);
+            inicializarTablas(vendedorLogeado);
+            tablaSolicitudes.refresh();
+            tablaRecomendados.refresh();
+            tablaVendedoresAliados.refresh();
+            mostrarMensaje("Notificacion vendedor", "Vendedor aceptado", "Se ha aceptado la solicitud", Alert.AlertType.INFORMATION);
+        }else {
+            mostrarMensaje("Notificacion vendedor", "Vendedor no seleccionado", "El vendedor No ha sido seleccionado", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
     void rechazarSolicitudAction(ActionEvent event) {
+        rechazarSolicitudEvent();
+    }
 
+    private void rechazarSolicitudEvent() {
+        if(vendedorSolicitud != null){
+            ModelFactoryController.getInstance().rechazarSolicitud(vendedorLogeado, vendedorSolicitud);
+            inicializarTablas(vendedorLogeado);
+            tablaSolicitudes.refresh();
+            tablaRecomendados.refresh();
+            tablaVendedoresAliados.refresh();
+            mostrarMensaje("Notificacion vendedor", "Vendedor rechazado", "Se ha rechazado la solicitud", Alert.AlertType.INFORMATION);
+        }else {
+            mostrarMensaje("Notificacion vendedor", "Vendedor no seleccionado", "El vendedor No ha sido seleccionado", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -102,8 +137,8 @@ public class RecomendadosController implements Serializable {
 
     private void enviarSolicitudEvent() {
         if(vendedorRecomendado != null){
-            System.out.println(vendedorRecomendado.toString());
-            //ModelFactoryController.getInstance().enviarSolicitud(vendedorLogeado, vendedorRecomendado);
+            ModelFactoryController.getInstance().enviarSolicitud(vendedorLogeado, vendedorRecomendado);
+            tablaRecomendados.setItems(obtenerVendedoresRecomendados(vendedorLogeado));
         }else{
             mostrarMensaje("Notificacion vendedor", "Vendedor no seleccionado", "El vendedor No ha sido seleccionado", Alert.AlertType.ERROR);
         }
@@ -128,14 +163,6 @@ public class RecomendadosController implements Serializable {
         dialogPane.getStyleClass().add("dialog");
         alert.showAndWait();
     }
-
-    public void inicializarVendedor(Vendedor vendedorLogeado) {
-        this.vendedorLogeado = vendedorLogeado;
-        tablaVendedoresAliados.setItems(obtenerVendedoresAliados(vendedorLogeado.getListaVendedoresAliados()));
-        tablaRecomendados.setItems(obtenerVendedoresRecomendados(vendedorLogeado));
-        tablaSolicitudes.setItems(obtenerVendedoresSolicitudes(vendedorLogeado.getListaSolicitudes()));
-    }
-
 
     @FXML
     void initialize(){
@@ -177,6 +204,17 @@ public class RecomendadosController implements Serializable {
         tablaSolicitudes.getItems().clear();
         listaVendedorSolicitudesData.addAll(listaVendedores);
         return listaVendedorSolicitudesData;
+    }
+
+    public void inicializarVendedor(Vendedor vendedorLogeado) {
+        this.vendedorLogeado = vendedorLogeado;
+        inicializarTablas(vendedorLogeado);
+    }
+    private void inicializarTablas(Vendedor vendedorLogeado) {
+        tablaVendedoresAliados.setItems(obtenerVendedoresAliados(vendedorLogeado.getListaVendedoresAliados()));
+        tablaRecomendados.setItems(obtenerVendedoresRecomendados(vendedorLogeado));
+        tablaSolicitudes.setItems(obtenerVendedoresSolicitudes(vendedorLogeado.getListaSolicitudes()));
+
     }
 
 }

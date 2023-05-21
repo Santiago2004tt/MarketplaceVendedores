@@ -189,4 +189,26 @@ public class Producto implements Serializable {
                 ", date='" + date + '\'' +
                 '}';
     }
+
+    public void aniadirComentario(String comentario) {
+        Comentario comentario1 = new Comentario(comentario);
+        this.muro.getListaComentarios().add(comentario1);
+    }
+
+    public boolean verificarExistencia(Vendedor vendedorLogeado) {
+        for (Vendedor vendedor: muro.getListaMeGusta()) {
+            if(vendedor.getCedula().equals(vendedorLogeado.getCedula())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void aniadirMeGusta(Vendedor vendedorLogeado ) {
+        muro.getListaMeGusta().add(vendedorLogeado);
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado) {
+        muro.getListaMeGusta().remove(vendedorLogeado);
+    }
 }

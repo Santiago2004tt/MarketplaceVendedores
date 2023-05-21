@@ -4,7 +4,6 @@ import MarketplaceVendedores.exceptions.*;
 
 import javafx.scene.image.Image;
 import java.io.Serializable;
-import java.sql.Struct;
 import java.util.ArrayList;
 
 /**
@@ -478,30 +477,61 @@ public class MarketplaceVendedores implements Serializable {
             }
         }
 
+        for (Vendedor vendedor1: vendedorAux.getListaSolicitudes()) {
+            if(vendedor1.getCedula().equals(vendedor.getCedula())){
+                return false;
+            }
+        }
+
         return true;
     }
 
     public boolean enviarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
         System.out.println(vendedorSeleccionado.getNombre());
         System.out.println(vendedorLogeado.getNombre());
-        if(verificarVendedor(vendedorLogeado, vendedorSeleccionado) == true){  //verifica si el vendedor tiene una solicitud
-            System.out.println("entro");
+        if(verificarVendedorSolicitud(vendedorLogeado, vendedorSeleccionado) == true){  //verifica si el vendedor tiene una solicitud
             vendedorSeleccionado.getListaSolicitudes().add(vendedorLogeado);
             return true;
         }
         return false;
     }
 
-    private boolean verificarVendedor(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
+    private boolean verificarVendedorSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSeleccionado) {
         System.out.println("entra");
         for (Vendedor vendedorAux: vendedorSeleccionado.getListaSolicitudes()) {
             System.out.println(vendedorAux.getCedula());
             System.out.println(vendedorLogeado.getCedula());
             if(vendedorAux.getCedula().equals(vendedorLogeado)){
-                System.out.println("entro al if");
                 return false;
             }
         }
         return true;
+    }
+
+    public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSolicitud) {
+        vendedorLogeado.getListaVendedoresAliados().add(vendedorSolicitud);
+        vendedorSolicitud.getListaVendedoresAliados().add(vendedorLogeado);
+        vendedorLogeado.getListaSolicitudes().remove(vendedorSolicitud);
+    }
+
+    public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSolicitud) {
+        vendedorLogeado.getListaSolicitudes().remove(vendedorSolicitud);
+    }
+
+    public void publicarComentario(Producto producto, String comentario) {
+        producto.aniadirComentario(comentario);
+    }
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        return producto.verificarExistencia(vendedorLogeado);
+    }
+
+
+    public void agregarMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        producto.aniadirMeGusta(vendedorLogeado);
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        producto.quitarMeGusta(vendedorLogeado);
     }
 }

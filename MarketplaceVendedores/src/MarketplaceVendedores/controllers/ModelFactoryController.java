@@ -10,8 +10,6 @@ import MarketplaceVendedores.model.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,12 +19,46 @@ public class ModelFactoryController {
     MarketplaceVendedores marketplaceVendedores;
     Main main;
 
+    public void agregarMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        marketplaceVendedores.agregarMeGusta(vendedorLogeado, producto);
+    }
+
     public void visitarCrearProducto(Vendedor vendedorLogeado) {
         main.mostrarCrearProducto(vendedorLogeado);
+        iniciarSalvarDatosPrueba();
     }
 
     public ArrayList<Vendedor> obtenerVendedores(Vendedor vendedor) {
         return marketplaceVendedores.obtenerListaVendedoresRecomendados(vendedor);
+    }
+
+    public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSolicitud) {
+        marketplaceVendedores.aceptarSolicitud(vendedorLogeado, vendedorSolicitud);
+        iniciarSalvarDatosPrueba();
+    }
+
+    public void rechazarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSolicitud) {
+        marketplaceVendedores.rechazarSolicitud(vendedorLogeado, vendedorSolicitud);
+        iniciarSalvarDatosPrueba();
+    }
+
+    public void accederProductoAliado(Vendedor vendedorLogeado, Vendedor vendedorVisitante, Producto productoSeleccionado) {
+        main.mostrarProductoAliado(vendedorLogeado, vendedorVisitante, productoSeleccionado);
+        iniciarSalvarDatosPrueba();
+    }
+
+    public void publicarComentario(Producto producto, String comentario) {
+        marketplaceVendedores.publicarComentario(producto, comentario);
+        iniciarSalvarDatosPrueba();
+
+    }
+
+    public boolean verificarExisteMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        return marketplaceVendedores.verificarExisteMeGusta(vendedorLogeado, producto);
+    }
+
+    public void quitarMeGusta(Vendedor vendedorLogeado, Producto producto) {
+        marketplaceVendedores.quitarMeGusta(vendedorLogeado, producto);
     }
 
     /**
@@ -95,7 +127,7 @@ public class ModelFactoryController {
         vendedor1.setCuenta(cuenta1);
         vendedor1.setNombre("Juan");
         vendedor1.setApellido("Gamer");
-        vendedor1.setCedula("1");
+        vendedor1.setCedula("0");
         vendedor1.setDireccion("Armenia-Quindio");
         vendedor.getListaVendedoresAliados().add(vendedor1);
         vendedor1.getListaVendedoresAliados().add(vendedor);
@@ -133,6 +165,7 @@ public class ModelFactoryController {
             if(getInstance().marketplaceVendedores.verificarCuenta(usuario, contrasenia)){
                 Vendedor vendedor = getInstance().marketplaceVendedores.buscarVendedorCuenta(usuario, contrasenia);
                 getInstance().accederCuenta(vendedor);
+                iniciarSalvarDatosPrueba();
                 Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a iniciado sesion", 1, "Inicio Sesion");
             }else{
                 mostrarMensaje("Notificacion vendedor", "cuenta no existe", "La cuenta no ha sido encontrada", Alert.AlertType.ERROR);
@@ -217,10 +250,14 @@ public class ModelFactoryController {
         main.MostrarLoginVendedor();
     }
     public void visitarVendedoresAction(Vendedor vendedorLoggeado) {
-        main.mostrarVendedoresAliados(vendedorLoggeado);
+        main.mostrarVendedoresAliadosRecomendado(vendedorLoggeado);
     }
     public void visitarMuroProducto(Producto productosVendedor, Vendedor vendedorLoggeado) {
         main.mostrarMuroProductoLogeado(productosVendedor, vendedorLoggeado);
+    }
+
+    public void visitarVendedorAliado(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        main.mostrarVendedorAliado(vendedorLogeado, vendedorAliado);
     }
 
     //-------------------------Metodos auxiliares----------------------------------------
