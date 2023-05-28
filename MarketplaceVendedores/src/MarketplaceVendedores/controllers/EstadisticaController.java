@@ -58,9 +58,20 @@ public class EstadisticaController implements Serializable {
     }
 
     private void consultaVendedoresActioon() {
-        vendedorSeleccionado.contarComentarios();
-        vendedorSeleccionado.contarLikes();
 
+        if(vendedorSeleccionado != null){
+            int cantComentarios = vendedorSeleccionado.contarComentarios();
+            int cantLikes=vendedorSeleccionado.contarLikes();
+            int cantiPublicaciones=vendedorSeleccionado.getListaProductos().size();
+            estadisticasChart.getData().clear();
+            XYChart.Series set1 = new XYChart.Series<>();
+
+            set1.getData().add(new XYChart.Data("Publicaciones", cantiPublicaciones));
+            set1.getData().add(new XYChart.Data("Likes", cantLikes));
+            set1.getData().add(new XYChart.Data("Comentarios",cantComentarios ));
+
+            estadisticasChart.getData().addAll(set1);
+        }
     }
 
     @FXML
@@ -87,16 +98,6 @@ public class EstadisticaController implements Serializable {
             vendedorSeleccionado = newSelection;
         });
         //--------------------------------------------------------------------------------------------------------//
-
-        XYChart.Series set1 = new XYChart.Series<>();
-
-        set1.getData().add(new XYChart.Data("Publicaciones", vendedorSeleccionado.contarComentarios()));
-        set1.getData().add(new XYChart.Data("Likes", vendedorSeleccionado.contarLikes()));
-        set1.getData().add(new XYChart.Data("Comentarios",9 ));
-
-        estadisticasChart.getData().addAll(set1);
-
-
     }
 
     public void aniadirAdministrador(Administrador administrador) {
