@@ -3,6 +3,7 @@ package MarketplaceVendedores.controllers;
 
 import MarketplaceVendedores.Persistencia.Persistencia;
 import MarketplaceVendedores.application.Main;
+import MarketplaceVendedores.exceptions.AdministradorException;
 import MarketplaceVendedores.exceptions.CuentaException;
 import MarketplaceVendedores.exceptions.ProductoExceptions;
 import MarketplaceVendedores.exceptions.VendedorException;
@@ -30,6 +31,10 @@ public class ModelFactoryController {
 
     public ArrayList<Vendedor> obtenerVendedores(Vendedor vendedor) {
         return marketplaceVendedores.obtenerListaVendedoresRecomendados(vendedor);
+    }
+
+    public ArrayList<Vendedor> obtenerDatosVendedores() {
+        return marketplaceVendedores.getListaVendedores();
     }
 
     public void aceptarSolicitud(Vendedor vendedorLogeado, Vendedor vendedorSolicitud) {
@@ -60,6 +65,8 @@ public class ModelFactoryController {
     public void quitarMeGusta(Vendedor vendedorLogeado, Producto producto) {
         marketplaceVendedores.quitarMeGusta(vendedorLogeado, producto);
     }
+
+
 
     /**
      * singleton holder
@@ -101,6 +108,7 @@ public class ModelFactoryController {
         Producto producto = new Producto();
         Comentario comentario = new Comentario();
         Vendedor vendedor = new Vendedor();
+
         Cuenta cuenta = new Cuenta("jere", "1");
         Cuenta cuenta1 = new Cuenta("juan", "2");
         //crear comentario
@@ -115,6 +123,8 @@ public class ModelFactoryController {
         producto.setCodigo("1");
         producto.setImage(image.getUrl());
         producto.setMuro(muro);
+
+
         //aniadir datos al vendedor
         vendedor.setCuenta(cuenta);
         vendedor.setNombre("Jeremias");
@@ -122,6 +132,9 @@ public class ModelFactoryController {
         vendedor.setCedula("1");
         vendedor.setDireccion("Armenia-Quindio");
         vendedor.getListaProductos().add(producto);
+        //admin
+        Administrador administrador = new Administrador("huen", "vante","4");
+        marketplaceVendedores.getListaAdministradores().add(administrador);
         //vendedor aliado
         Vendedor vendedor1 = new Vendedor();
         vendedor1.setCuenta(cuenta1);
@@ -164,7 +177,7 @@ public class ModelFactoryController {
         try {
             if(getInstance().marketplaceVendedores.verificarCuenta(usuario, contrasenia)){
                 Vendedor vendedor = getInstance().marketplaceVendedores.buscarVendedorCuenta(usuario, contrasenia);
-                getInstance().accederCuenta(vendedor);
+                accederCuenta(vendedor);
                 iniciarSalvarDatosPrueba();
                 Persistencia.guardaRegistroLog(vendedor.getNombre()+" "+vendedor.getApellido()+" a iniciado sesion", 1, "Inicio Sesion");
             }else{
@@ -177,6 +190,25 @@ public class ModelFactoryController {
 
         }
     }
+
+    public void iniciarSesionAdmin(String usuario, String contrasenia){
+        try {
+            if(getInstance().marketplaceVendedores.verificarCuentaAdmin(usuario, contrasenia)){
+                Administrador administrador = getInstance().marketplaceVendedores.buscarAdminCuenta(usuario, contrasenia);
+                accederEstadisticas(administrador);
+                iniciarSalvarDatosPrueba();
+                Persistencia.guardaRegistroLog(administrador.getNombre()+" "+ " a iniciado sesion", 1, "Inicio Sesion");
+            }else{
+                mostrarMensaje("Notificacion admin", "cuenta no existe", "La cuenta no ha sido encontrada", Alert.AlertType.ERROR);
+                Persistencia.guardaRegistroLog("No a iniciado sesion", 2, "Inicio Sesion Fallida");
+
+            }
+        }catch (AdministradorException e){
+            mostrarMensaje("Notificacion admin", "Error", "Error", Alert.AlertType.ERROR);
+
+        }
+    }
+
 
     //-------------------------------------Metodos de vendedores-------------------
     public boolean crearVendedor(String nombre, String apellido, String cedula, String direccion, String usuario, String  contrasenia) throws CuentaException, VendedorException {
@@ -242,8 +274,25 @@ public class ModelFactoryController {
         main.mostrarMainVendedor(vendedor);
     }
 
+    private void accederEstadisticas(Administrador administrador) {
+        main.mostrarEstadisticas(administrador);
+    }
+
     public void accederCrearCuenta() {
         main.mostrarCrearCuenta();
+    }
+
+    public void accederLoginAdmin() {
+        main.MostrarLoginAdmin();
+
+    }
+    public void volverLoginAdmin() {
+        main.MostrarLoginAdmin();
+    }
+
+
+    public void volverLogin() {
+        main.MostrarLoginVendedor();
     }
 
     public void volverInicioSesion() {

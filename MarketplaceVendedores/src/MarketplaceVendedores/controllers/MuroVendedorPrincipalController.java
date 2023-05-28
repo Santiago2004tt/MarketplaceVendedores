@@ -127,7 +127,7 @@ public class MuroVendedorPrincipalController implements Serializable {
         this.labelBienvenidaVendedor.setText("Bienvenido Vendedor " + vendedorLoggeado.getNombre());
         this.labelCedulaVendedor.setText("Cedula: " + vendedorLoggeado.getCedula());
         this.labelDirecionVendedor.setText("Direccion: " + vendedorLoggeado.getDireccion());
-        tblProductos.getItems().clear();
+        //tblProductos.getItems().clear();
         tblProductos.setItems(obtenerListaProductos());
     }
 

@@ -22,6 +22,19 @@ public class LoginVendedorController implements Serializable {
     private PasswordField txtVendedorPassword;
 
     @FXML
+    private Button LogAdminButton;
+
+
+    @FXML
+    void LoginAdminAction(ActionEvent event) {
+        accederLoginAdmin();
+    }
+
+    private void accederLoginAdmin() {
+        ModelFactoryController.getInstance().accederLoginAdmin();
+    }
+
+    @FXML
     void crearCuentaAction(ActionEvent event) {
         accederCrearCuenta();
     }
@@ -39,10 +52,7 @@ public class LoginVendedorController implements Serializable {
         String usuario = txtVendedorUser.getText();
         String contrasenia = txtVendedorPassword.getText();
         if(validarDatos(usuario, contrasenia)){
-            //prueba
-            //Cuenta cuenta = ModelFactoryController.getInstance().buscarCuenta("12", "12");
-            //System.out.println(cuenta.getUsuario()+ " existe");
-            ModelFactoryController.getInstance().iniciarSesion(usuario, contrasenia);
+           ModelFactoryController.getInstance().iniciarSesion(usuario, contrasenia);
         } else{
             mostrarMensaje("Notificacion vendedor", "Vendedor no eliminado", "El vendedor No ha sido eliminado", Alert.AlertType.ERROR);
         }

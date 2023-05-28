@@ -211,6 +211,22 @@ public class Vendedor implements Serializable {
     public int hashCode() {
         return Objects.hash(cedula);
     }
+
+    public int contarComentarios() {
+        int sumaComentarios = 0;
+        for (Producto producto : listaProductos) {
+            sumaComentarios += producto.getMuro().getListaComentarios().size();
+        }
+        return sumaComentarios;
+    }
+
+    public int contarLikes() {
+        int sumaLikes = 0;
+        for (Producto producto : listaProductos) {
+            sumaLikes += producto.getMuro().getListaMeGusta().size();
+        }
+        return sumaLikes;
+    }
 }
 
 

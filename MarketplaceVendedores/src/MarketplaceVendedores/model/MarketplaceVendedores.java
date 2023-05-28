@@ -25,6 +25,8 @@ public class MarketplaceVendedores implements Serializable {
     private ArrayList<Vendedor> listaVendedores;
     private ArrayList<Cuenta> listaCuentas;
 
+    private ArrayList<Administrador> listaAdministradores;
+
     /**
      * Constructor de la clase MarketplaceVendedores
      * --------------------------------------------
@@ -36,6 +38,7 @@ public class MarketplaceVendedores implements Serializable {
         listaVendedores = new ArrayList<Vendedor>();
         listaProductos = new ArrayList<Producto>();
         listaCuentas = new ArrayList<Cuenta>();
+        listaAdministradores = new ArrayList<Administrador>();
     }
 
     public MarketplaceVendedores() {
@@ -96,6 +99,15 @@ public class MarketplaceVendedores implements Serializable {
     public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
         this.listaCuentas = listaCuentas;
     }
+
+    public ArrayList<Administrador> getListaAdministradores() {
+        return listaAdministradores;
+    }
+
+    public void setListaAdministradores(ArrayList<Administrador> listaAdministradores) {
+        this.listaAdministradores = listaAdministradores;
+    }
+
     //---------------------------------CRUD-vendedor--------------------------------------------------------//
     //---------------------------------CRUD-seller--------------------------------------------------------//
 
@@ -439,6 +451,11 @@ public class MarketplaceVendedores implements Serializable {
         return verificarCuentaContrasenia(usuario, contrasenia);
     }
 
+    public boolean verificarCuentaAdmin(String usuario, String contrasenia) {
+
+        return verificarCuentaContraseniaAdmin(usuario, contrasenia);
+    }
+
     public Vendedor buscarVendedorCuenta(String usuario, String contrasenia) throws VendedorException {
         Vendedor vendedorAux = null;
 
@@ -533,5 +550,28 @@ public class MarketplaceVendedores implements Serializable {
 
     public void quitarMeGusta(Vendedor vendedorLogeado, Producto producto) {
         producto.quitarMeGusta(vendedorLogeado);
+    }
+//----------------------------------------------Admin---------------------------------------------------------//
+    public Administrador buscarAdminCuenta(String usuario, String contrasenia) throws AdministradorException{
+        Administrador adminAux = null;
+
+        for (Administrador administrador: listaAdministradores) {
+            if(administrador.getUsuario().equals(usuario) && administrador.getContrasenia().equals(contrasenia)){
+                adminAux= administrador;
+            }
+        }
+        if(adminAux == null){
+            throw new AdministradorException("el administrador no se a encontrado");
+        }
+        return adminAux;
+    }
+
+    private boolean verificarCuentaContraseniaAdmin(String usuario, String contrasenia) {
+        for (Administrador administrador : listaAdministradores) {
+            if (administrador.getUsuario().equals(usuario) && administrador.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

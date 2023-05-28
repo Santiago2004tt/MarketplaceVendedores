@@ -1,6 +1,7 @@
 package MarketplaceVendedores.application;
 
 import MarketplaceVendedores.controllers.*;
+import MarketplaceVendedores.model.Administrador;
 import MarketplaceVendedores.model.Producto;
 import MarketplaceVendedores.model.Vendedor;
 import javafx.application.Application;
@@ -38,6 +39,25 @@ public class Main extends Application {
             Scene scene = new Scene(borderPane);
             stage.setScene(scene);
             stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void MostrarLoginAdmin (){
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/LoginAdministrador.fxml"));
+            BorderPane borderPane = loader.load();
+            LoginAdministradorController controller = loader.getController();
+            controller.setMain(this);
+            Scene scene = new Scene(borderPane);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Admin");
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -176,4 +196,22 @@ public class Main extends Application {
         }
     }
 
+    public void mostrarEstadisticas(Administrador administrador) {
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/Estadisticas.fxml"));
+            AnchorPane rootLayout = loader.load();
+            EstadisticaController controller = loader.getController();
+            controller.aniadirAdministrador(administrador);
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
