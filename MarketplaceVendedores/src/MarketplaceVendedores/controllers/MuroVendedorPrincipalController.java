@@ -5,7 +5,6 @@ import MarketplaceVendedores.model.Comentario;
 import MarketplaceVendedores.model.Estado;
 import MarketplaceVendedores.model.Producto;
 import MarketplaceVendedores.model.Vendedor;
-import MarketplaceVendedores.test.Miguel;
 import com.sun.webkit.Timer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

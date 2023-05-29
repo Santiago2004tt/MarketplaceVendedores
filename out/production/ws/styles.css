@@ -1,3 +1,11 @@
 .default-color0.chart-bar { -fx-bar-fill: #9933FF
 }
 
+.default-color1.chart-bar { -fx-bar-fill: GREEN
+}
+
+.default-color2.chart-bar { -fx-bar-fill: RED
+}
+
+
+

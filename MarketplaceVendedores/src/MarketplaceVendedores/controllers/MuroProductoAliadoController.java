@@ -3,7 +3,6 @@ package MarketplaceVendedores.controllers;
 import MarketplaceVendedores.model.Comentario;
 import MarketplaceVendedores.model.Producto;
 import MarketplaceVendedores.model.Vendedor;
-import MarketplaceVendedores.test.Test;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

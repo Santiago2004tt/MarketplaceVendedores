@@ -15,7 +15,29 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ModelFactoryController {
+public class ModelFactoryController implements Runnable{
+
+
+    Thread guardarXml;
+    Thread guardarBinario;
+    Thread guardarListaVendedores;
+    @Override
+    public void run() {
+        Thread hiloActual = Thread.currentThread();
+        if(hiloActual == guardarXml){
+            Persistencia.guardarRecursoXML(marketplaceVendedores);
+        }
+        if(hiloActual == guardarBinario){
+            Persistencia.guardarRecursoBinario(marketplaceVendedores);
+        }
+        if(hiloActual == guardarListaVendedores){
+            try {
+                Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
+            }catch (IOException e){
+
+            }
+        }
+    }
 
     MarketplaceVendedores marketplaceVendedores;
     Main main;
@@ -85,6 +107,7 @@ public class ModelFactoryController {
      */
     public static class SingletonHolder {
         public final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+
     }
 
     /**
@@ -102,9 +125,8 @@ public class ModelFactoryController {
         this.marketplaceVendedores=Persistencia.cargarRecursoBinario();
         if(marketplaceVendedores==null) {
             inicializarDatos();
-            iniciarSalvarDatosPrueba();
         }
-
+        iniciarSalvarDatosPrueba();
     }
 
     /**
@@ -172,15 +194,9 @@ public class ModelFactoryController {
      */
     private void iniciarSalvarDatosPrueba() {
 
-        try {
-            Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-            Persistencia.guardarRecursoXML(marketplaceVendedores);
-            Persistencia.guardarRecursoBinario(marketplaceVendedores);
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        guardarRecuersoXml();
+        guardarRecuersoBinario();
+        guardarRecuersoVendedores();
     }
 
     //---------------------------------------Metodo de iniciar sesion -------------------------------------
@@ -330,5 +346,23 @@ public class ModelFactoryController {
         alert.setContentText(contenido);
         DialogPane dialogPane = alert.getDialogPane();
         alert.showAndWait();
+    }
+
+    //---------------------------------------Metodos-Guardar------------------------------------------//
+    public void guardarRecuersoXml(){
+       guardarXml = new Thread(this);
+       guardarXml.start();
+    }
+
+    public void guardarRecuersoBinario(){
+        Persistencia.guardarRecursoBinario(marketplaceVendedores);
+    }
+
+    public void guardarRecuersoVendedores(){
+        try {
+            Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
+        }catch (IOException e){
+
+        }
     }
 }
