@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: purple;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MarketplaceVendedores.controllers.ChatController">
+   <children>
+      <Button fx:id="btnAtras" layoutX="20.0" layoutY="350.0" mnemonicParsing="false" onAction="#volver" text="Atras" />
+      <TableView fx:id="tblMensajesLog" layoutX="42.0" layoutY="53.0" prefHeight="241.0" prefWidth="222.0">
+        <columns>
+          <TableColumn fx:id="columnMensajeLog" prefWidth="221.0" text="Mensajes" />
+            <TableColumn prefWidth="221.0" text="C1" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tblMensajesVisitante" layoutX="347.0" layoutY="53.0" prefHeight="241.0" prefWidth="222.0">
+         <columns>
+            <TableColumn fx:id="columnMensajeVisitante" prefWidth="221.0" text="Mensajes" />
+            <TableColumn prefWidth="221.0" text="C1" />
+         </columns>
+      </TableView>
+      <TextField fx:id="textFieldMensaje" layoutX="226.0" layoutY="306.0" prefHeight="25.0" prefWidth="323.0" />
+      <Button fx:id="btnEnviar" layoutX="508.0" layoutY="350.0" mnemonicParsing="false" onAction="#enviar" text="enivar" />
+      <Label fx:id="txtLogeado" layoutX="114.0" layoutY="20.0" text="Logeado" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtVisitante" layoutX="420.0" layoutY="20.0" text="Visitante" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
