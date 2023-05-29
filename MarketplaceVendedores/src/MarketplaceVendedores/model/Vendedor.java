@@ -22,6 +22,7 @@ public class Vendedor implements Serializable {
     private ArrayList<Producto> listaProductos;
     private ArrayList<Vendedor> listaSolicitudes;
     private ArrayList<Vendedor> listaRecomendados;
+    private ArrayList<Chat> listaChats;
     private String nombre;
     private String apellido;
     private String cedula;
@@ -48,6 +49,7 @@ public class Vendedor implements Serializable {
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
+        listaChats = new ArrayList<>();
     }
 
     /**
@@ -60,6 +62,7 @@ public class Vendedor implements Serializable {
         listaProductos = new ArrayList<Producto>();
         listaSolicitudes = new ArrayList<Vendedor>();
         listaRecomendados= new ArrayList<Vendedor>();
+        listaChats = new ArrayList<>();
     }
 
     /**
@@ -187,6 +190,14 @@ public class Vendedor implements Serializable {
         this.cuenta = cuenta;
     }
 
+    public ArrayList<Chat> getListaChats() {
+        return listaChats;
+    }
+
+    public void setListaChats(ArrayList<Chat> listaChats) {
+        this.listaChats = listaChats;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -226,6 +237,47 @@ public class Vendedor implements Serializable {
             sumaLikes += producto.getMuro().getListaMeGusta().size();
         }
         return sumaLikes;
+    }
+
+    public ArrayList<Mensaje> buscarChat(String cedula) {
+        ArrayList<Mensaje> listaMensajes = null;
+        if(existeChat(cedula)){
+            listaMensajes = buscarChatCedula(cedula);
+        }else {
+            Chat chat = new Chat(cedula);
+            listaChats.add(chat);
+            listaMensajes = chat.getListaEnviado();
+        }
+        return listaMensajes;
+    }
+
+    private ArrayList<Mensaje> buscarChatCedula(String cedula) {
+        ArrayList<Mensaje> listaMensajes = null;
+        for (Chat chat: listaChats) {
+            if(chat.getId().equals(cedula)){
+                listaMensajes = chat.getListaEnviado();
+            }
+        }
+        return listaMensajes;
+    }
+
+    private boolean existeChat(String cedula) {
+        for (Chat chat: listaChats) {
+            if(chat.getId().equals(cedula)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void enviarMensaje(String cedula, String mensaje) {
+        for (Chat chat: listaChats) {
+            if(chat.getId().equals(cedula)){
+                Mensaje mensaje1 = new Mensaje(mensaje);
+                chat.getListaEnviado().add(mensaje1);
+            }
+        }
+
     }
 }
 

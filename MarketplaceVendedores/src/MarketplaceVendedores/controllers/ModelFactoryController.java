@@ -66,6 +66,18 @@ public class ModelFactoryController {
         marketplaceVendedores.quitarMeGusta(vendedorLogeado, producto);
     }
 
+    public void visitarChat(Vendedor vendedorLogeado, Vendedor vendedorAliado) {
+        main.mostrarChat(vendedorLogeado, vendedorAliado);
+    }
+
+    public ArrayList<Mensaje> obtenerMensajesLog(Vendedor vendedorLogeado, String cedula) {
+        return marketplaceVendedores.obtenerMensajesLog(vendedorLogeado, cedula);
+    }
+
+    public void enviarMensajeChat(Vendedor vendedorLogeado, String cedula, String mensaje) {
+        marketplaceVendedores.enviarMensaje(vendedorLogeado, cedula, mensaje);
+        iniciarSalvarDatosPrueba();
+    }
 
 
     /**

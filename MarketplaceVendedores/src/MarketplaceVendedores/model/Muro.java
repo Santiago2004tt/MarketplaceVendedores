@@ -74,4 +74,6 @@ public class Muro implements Serializable {
     public void setListaMeGusta(ArrayList<Vendedor> listaMeGusta) {
         this.listaMeGusta = listaMeGusta;
     }
+
+
 }

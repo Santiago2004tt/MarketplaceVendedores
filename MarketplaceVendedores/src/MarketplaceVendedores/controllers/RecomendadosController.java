@@ -91,7 +91,13 @@ public class RecomendadosController implements Serializable {
 
     @FXML
     void chatAction(ActionEvent event) {
+        visitarChat();
+    }
 
+    private void visitarChat() {
+        if(vendedorAliado != null){
+            ModelFactoryController.getInstance().visitarChat(vendedorLogeado, vendedorAliado);
+        }
     }
 
     @FXML

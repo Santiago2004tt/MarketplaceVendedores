@@ -214,4 +214,23 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    public void mostrarChat(Vendedor vendedorLogeado, Vendedor vendedorVisitante) {
+        try {
+            stage.close();
+            stage = new Stage();
+            stage.getIcons().add(IconMarket);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../views/ChatView.fxml"));
+            AnchorPane rootLayout = loader.load();
+            ChatController controller = loader.getController();
+            controller.anidirVendedores(vendedorLogeado, vendedorVisitante);
+            Scene scene = new Scene(rootLayout);
+            stage.setScene(scene);
+            stage.setTitle("Marketplace Vendedores");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

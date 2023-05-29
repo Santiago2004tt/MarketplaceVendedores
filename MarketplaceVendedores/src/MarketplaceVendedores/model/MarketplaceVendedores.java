@@ -574,4 +574,12 @@ public class MarketplaceVendedores implements Serializable {
         }
         return false;
     }
+
+    public ArrayList<Mensaje> obtenerMensajesLog(Vendedor vendedorLogeado, String cedula) {
+        return vendedorLogeado.buscarChat(cedula);
+    }
+
+    public void enviarMensaje(Vendedor vendedorLogeado, String cedula, String mensaje) {
+        vendedorLogeado.enviarMensaje(cedula, mensaje);
+    }
 }
