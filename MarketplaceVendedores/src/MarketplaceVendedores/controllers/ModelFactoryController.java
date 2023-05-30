@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class ModelFactoryController implements Runnable{
 
-
     Thread guardarXml;
     Thread guardarBinario;
     Thread guardarListaVendedores;
@@ -194,9 +193,9 @@ public class ModelFactoryController implements Runnable{
      */
     private void iniciarSalvarDatosPrueba() {
 
-        guardarRecuersoXml();
-        guardarRecuersoBinario();
-        guardarRecuersoVendedores();
+        guardarRecursoXml();
+        guardarRecursoBinario();
+        guardarRecursoVendedores();
     }
 
     //---------------------------------------Metodo de iniciar sesion -------------------------------------
@@ -349,20 +348,18 @@ public class ModelFactoryController implements Runnable{
     }
 
     //---------------------------------------Metodos-Guardar------------------------------------------//
-    public void guardarRecuersoXml(){
+    public void guardarRecursoXml(){
        guardarXml = new Thread(this);
        guardarXml.start();
     }
 
-    public void guardarRecuersoBinario(){
-        Persistencia.guardarRecursoBinario(marketplaceVendedores);
+    public void guardarRecursoBinario(){
+        guardarBinario = new Thread(this);
+        guardarBinario.start();
     }
 
-    public void guardarRecuersoVendedores(){
-        try {
-            Persistencia.guardarVendedores(marketplaceVendedores.getListaVendedores());
-        }catch (IOException e){
-
-        }
+    public void guardarRecursoVendedores(){
+        guardarListaVendedores = new Thread(this);
+        guardarListaVendedores.start();
     }
 }

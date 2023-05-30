@@ -277,7 +277,6 @@ public class Vendedor implements Serializable {
                 chat.getListaEnviado().add(mensaje1);
             }
         }
-
     }
 }
 
